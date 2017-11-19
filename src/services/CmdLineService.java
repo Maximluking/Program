@@ -9,13 +9,12 @@ public class CmdLineService {
     public CmdLineService(){
     }
 
-
-
     public void showMainMenu(){
         System.out.println("1. Работа с клиентами");
         System.out.println("2. Работа с продуктом");
         System.out.println("3. Работа с торговой точкой");
         System.out.println("4. Выход из программы");
+
     }
     public void showClientMenu(){
         System.out.println("1. Добавить нового клиента");

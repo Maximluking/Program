@@ -42,6 +42,7 @@ public class Main {
                         default:
                             System.out.println("Неправильный ввод \n");
                     }
+                    continue;
                 case 2:
                     cmdLineService.showProductMenu();
                     int s2 = cmdLineService.readCommand();
@@ -63,6 +64,7 @@ public class Main {
                         default:
                             System.out.println("Неправильный ввод \n");
                     }
+                    continue;
                 case 3:
                     cmdLineService.showShopMenu();
                     int s3 = cmdLineService.readCommand();
@@ -84,6 +86,7 @@ public class Main {
                        default:
                             System.out.println("Неправильный ввод \n");
                     }
+                    continue;
                 case 4:
                     isWork = false;
                     break;
