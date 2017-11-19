@@ -38,6 +38,12 @@ public class CmdLineService {
         System.out.println("5. Вернутся назад");
     }
     public int readCommand(){
-        return command.nextInt();
+       if(command.hasNextInt()){
+       return command.nextInt();}else
+           {
+               System.out.println("Введен недопустимый формат данных, повторите ввод:");
+               command = new Scanner(System.in);
+               return readCommand();
+           }
     }
 }

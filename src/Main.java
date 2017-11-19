@@ -6,10 +6,9 @@ import services.impl.ClientServiceImpl;
 import services.impl.ProductServiceImpl;
 import services.impl.ShopServiceImpl;
 
-import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
         ClientService clientService = new ClientServiceImpl();
         ProductService productService = new ProductServiceImpl();
@@ -20,7 +19,7 @@ public class Main {
         do {
             cmdLineService.showMainMenu();
             int s = cmdLineService.readCommand();
-            switch (s) {
+            switch (s){
                 case 1:
                     cmdLineService.showClientMenu();
                     int s1 = cmdLineService.readCommand();
