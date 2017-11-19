@@ -21,5 +21,15 @@ public class  ClientServiceImpl implements ClientService {
         // do something
     }
 
+    @Override
+    public void modifyClient() {
+
+    }
+
+    @Override
+    public void findClient() {
+
+    }
+
 
 }
