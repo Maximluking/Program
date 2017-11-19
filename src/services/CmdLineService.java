@@ -39,7 +39,7 @@ public class CmdLineService {
     }
     public int readCommand(){
        if(command.hasNextInt()){
-       return command.nextInt();}else
+       return command.nextInt();} else
            {
                System.out.println("Введен недопустимый формат данных, повторите ввод:");
                command = new Scanner(System.in);
