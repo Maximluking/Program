@@ -6,6 +6,8 @@ public interface ClientService {
 
     void removeClient();
 
-    //modify, find etc....
+    void modifyClient();
+
+    void findClient();
 
 }

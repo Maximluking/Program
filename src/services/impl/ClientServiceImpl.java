@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClientServiceImpl implements ClientService {
+public class  ClientServiceImpl implements ClientService {
 
     private List<Client> clients = new ArrayList<>();
 
     @Override
     public void addClient() {
-        // do something
+
     }
 
     @Override
