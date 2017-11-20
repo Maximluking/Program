@@ -3,14 +3,16 @@ package model;
 public class Product {
 
     private String productName;
+    private int productId;
     private double productValue;
     private double productWeight;
     private double productVolume;
     private double productDiscount;
     private int productAgeManufacture;
 
-    public Product(String productName, double productValue, double productWeight, double productVolume, double productDiscount, int productAgeManufacture) {
+    public Product(String productName, int productId, double productValue, double productWeight, double productVolume, double productDiscount, int productAgeManufacture) {
         this.productName = productName;
+        this.productId = productId;
         this.productValue = productValue;
         this.productWeight = productWeight;
         this.productVolume = productVolume;
@@ -20,6 +22,14 @@ public class Product {
 
     public String getProductName() {
         return productName;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public void setProductName(String productName) {
