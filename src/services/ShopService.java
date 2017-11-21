@@ -1,5 +1,7 @@
 package services;
 
+import model.Shop;
+
 public interface ShopService {
 
     void addShop();
@@ -9,4 +11,6 @@ public interface ShopService {
     void modifyShop();
 
     void findShop();
+
+    String toString(Shop shop);
 }

@@ -1,5 +1,7 @@
 package model;
 
+import services.CmdLineGetInfo;
+
 public class Product {
 
     private String productName;
@@ -7,15 +9,28 @@ public class Product {
     private double productValue;
     private double productWeight;
     private double productVolume;
-    private int productAgeManufacture;
+    private String productAgeManufacture;
 
-    public Product(String productName, int productId, double productValue, double productWeight, double productVolume, double productDiscount, int productAgeManufacture) {
-        this.productName = productName;
-        this.productId = productId;
-        this.productValue = productValue;
-        this.productWeight = productWeight;
-        this.productVolume = productVolume;
-        this.productAgeManufacture = productAgeManufacture;
+    public Product() {
+        System.out.println("Введите название для нового товара: ");
+        this.productName = CmdLineGetInfo.cmdLineGetString();
+        this.productId = this.hashCode();
+        System.out.println("Введите стоимость еденицы продукта: ");
+        this.productValue = CmdLineGetInfo.cmdLineGetInt();
+        System.out.println("Введите вес единицы продукта: ");
+        this.productWeight = CmdLineGetInfo.cmdLineGetInt();
+        System.out.println("Введите объем единицы продукта: ");
+        this.productVolume = CmdLineGetInfo.cmdLineGetInt();
+        System.out.println("Введите дату изготовления данной единицы продукта: ");
+        this.productAgeManufacture = CmdLineGetInfo.cmdLineGetString();
+
+        System.out.println("Вы добавили в базу следующего продукт:");
+        System.out.println("Название: " + this.productName);
+        System.out.println("Стоимость: " + this.productValue);
+        System.out.println("ID продукта в базе магазина: " + this.productId );
+        System.out.println("Вес еденицы продукта: " + this.productWeight + " г.");
+        System.out.println("Объем единицы продукта: " + this.productVolume + " см.куб.");
+        System.out.println("Дата изготовления данной единицы продукта: " + this.productAgeManufacture);
     }
 
     public String getProductName() {
@@ -58,11 +73,11 @@ public class Product {
         this.productVolume = productVolume;
     }
 
-    public int getProductAgeManufacture() {
+    public String getProductAgeManufacture() {
         return productAgeManufacture;
     }
 
-    public void setProductAgeManufacture(int productAgeManufacture) {
+    public void setProductAgeManufacture(String productAgeManufacture) {
         this.productAgeManufacture = productAgeManufacture;
     }
 }

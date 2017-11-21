@@ -1,5 +1,7 @@
 package services;
 
+import model.Product;
+
 public interface ProductService {
 
     void addProduct();
@@ -9,5 +11,7 @@ public interface ProductService {
     void modifyProduct();
 
     void findProduct();
+
+    String toString(Product product);
 
 }

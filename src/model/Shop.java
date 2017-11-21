@@ -1,15 +1,25 @@
 package model;
 
+import services.CmdLineGetInfo;
+
 public class Shop {
 
     private String shopName;
     private String shopAdress;
     private int shopID;
 
-    public Shop(String shopName, String shopAdress, int shopID) {
-        this.shopName = shopName;
-        this.shopAdress = shopAdress;
-        this.shopID = shopID;
+    public Shop() {
+        System.out.println("Введите название для магазина: ");
+        this.shopName = CmdLineGetInfo.cmdLineGetString();
+        System.out.println("Введите адресс магазина: ");
+        this.shopAdress = CmdLineGetInfo.cmdLineGetString();
+        this.shopID = this.hashCode();
+
+        System.out.println("Вы добавили в базу следующий магазин:");
+        System.out.println("Название: " + this.shopName);
+        System.out.println("Адресс: " + this.shopAdress);
+        System.out.println("ID продукта в базе магазина: " + this.shopID);
+
     }
 
     public String getShopName() {

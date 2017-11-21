@@ -3,7 +3,6 @@ package services.impl;
 import model.Client;
 import services.ClientService;
 import services.CmdLineGetInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,23 +19,48 @@ public class  ClientServiceImpl implements ClientService {
 
     @Override
     public void removeClient() {
-        System.out.println("Полный список клиентов магазина:");
+        System.out.println("Текущий полный список клиентов магазина: \n");
         for (Client client: clients) {
             System.out.println(toString(client));
             System.out.println();
         }
         System.out.println("\n Укажите индекс элемента коллекции для удаления соответствующего клиента из базы: ");
         clients.remove(CmdLineGetInfo.cmdLineGetInt());
+        System.out.println("Текущий полный список клиентов магазина после редактирования базы: \n");
+        for (Client client: clients) {
+            System.out.println(toString(client));
+            System.out.println();
+        }
     }
 
     @Override
     public void modifyClient() {
-
+        System.out.println("Текущий полный список клиентов магазина:");
+        for (Client client: clients) {
+            System.out.println(toString(client));
+            System.out.println();
+        }
+        System.out.println("Укажите индекс элемента коллекции для изменения данных соответствующего клиента из базы и после этого вводите новые данные: ");
+        clients.set(CmdLineGetInfo.cmdLineGetInt(), new Client());
+        System.out.println("Текущий полный список клиентов магазина после редактирования базы: \n");
+        for (Client client: clients) {
+            System.out.println(toString(client));
+            System.out.println();
+        }
     }
 
     @Override
     public void findClient() {
-
+        System.out.println("Введите Имя искомого клиента: \n");
+        String name = CmdLineGetInfo.cmdLineGetString();
+        System.out.println("Введите фамилию искомого клиента \n");
+        String surname = CmdLineGetInfo.cmdLineGetString();
+        for (Client client: clients) {
+            if(name.equals(client.getClientName())||surname.equals(client.getClientSurname())){
+                System.out.println("Найдено совпадение: \n");
+                System.out.println(toString(client));
+            }else System.out.println("Совпадений не найдено!");
+        }
     }
 
     @Override
