@@ -15,21 +15,21 @@ public class Product {
         System.out.println("Введите название для нового товара: ");
         this.productName = CmdLineGetInfo.cmdLineGetString();
         this.productId = this.hashCode();
-        System.out.println("Введите стоимость еденицы продукта: ");
+        System.out.println("Введите стоимость еденицы продукта в грн.: ");
         this.productValue = CmdLineGetInfo.cmdLineGetInt();
-        System.out.println("Введите вес единицы продукта: ");
+        System.out.println("Введите вес единицы продукта в граммах: ");
         this.productWeight = CmdLineGetInfo.cmdLineGetInt();
-        System.out.println("Введите объем единицы продукта: ");
+        System.out.println("Введите объем единицы продуктав см.куб.: ");
         this.productVolume = CmdLineGetInfo.cmdLineGetInt();
         System.out.println("Введите дату изготовления данной единицы продукта: ");
         this.productAgeManufacture = CmdLineGetInfo.cmdLineGetString();
 
-        System.out.println("Вы добавили в базу следующего продукт:");
+        System.out.println("Вы добавили в базу следующий продукт: \n");
         System.out.println("Название: " + this.productName);
-        System.out.println("Стоимость: " + this.productValue);
-        System.out.println("ID продукта в базе магазина: " + this.productId );
-        System.out.println("Вес еденицы продукта: " + this.productWeight + " г.");
-        System.out.println("Объем единицы продукта: " + this.productVolume + " см.куб.");
+        System.out.println("Стоимость: " + this.productValue + " грн.");
+        System.out.println("ID продукта в базе магазина: " + this.productId);
+        System.out.println("Вес еденицы продукта в граммах: " + this.productWeight + " г.");
+        System.out.println("Объем единицы продукта в сантиметрах кубических: " + this.productVolume + " см.куб.");
         System.out.println("Дата изготовления данной единицы продукта: " + this.productAgeManufacture);
     }
 

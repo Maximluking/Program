@@ -15,6 +15,7 @@ public class  ClientServiceImpl implements ClientService {
     @Override
     public void addClient() {
         clients.add(new Client());
+        System.out.println();
     }
 
     @Override
@@ -31,6 +32,7 @@ public class  ClientServiceImpl implements ClientService {
             System.out.println(toString(client));
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override
@@ -47,20 +49,21 @@ public class  ClientServiceImpl implements ClientService {
             System.out.println(toString(client));
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override
     public void findClient() {
-        System.out.println("Введите Имя искомого клиента: \n");
+        System.out.println("Введите имя искомого клиента: \n");
         String name = CmdLineGetInfo.cmdLineGetString();
         System.out.println("Введите фамилию искомого клиента \n");
         String surname = CmdLineGetInfo.cmdLineGetString();
         for (Client client: clients) {
             if(name.equals(client.getClientName())||surname.equals(client.getClientSurname())){
-                System.out.println("Найдено совпадение: \n");
-                System.out.println(toString(client));
+                System.out.println("Найдено совпадение: \n" + toString(client));
             }else System.out.println("Совпадений не найдено!");
         }
+        System.out.println();
     }
 
     @Override

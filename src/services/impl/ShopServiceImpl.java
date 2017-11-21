@@ -13,39 +13,37 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void addShop() {
         shops.add(new Shop());
+        System.out.println();
     }
 
     @Override
     public void removeShop() {
         System.out.println("Текущий полный список магазинов: \n");
         for (Shop shop : shops) {
-            System.out.println(toString(shop));
-            System.out.println();
+            System.out.println(toString(shop) + "\n");
         }
         System.out.println("\n Укажите индекс элемента коллекции для удаления соответствующеей магазина из базы: ");
         shops.remove(CmdLineGetInfo.cmdLineGetInt());
         System.out.println("Текущий полный список магазинов после редактирования базы: \n");
         for (Shop shop : shops) {
-            System.out.println(toString(shop));
-            System.out.println();
-
+            System.out.println(toString(shop) + "\n");
         }
+        System.out.println();
     }
 
     @Override
     public void modifyShop() {
         System.out.println("Текущий полный список магазинов: \n");
         for (Shop shop: shops) {
-            System.out.println(toString(shop));
-            System.out.println();
+            System.out.println(toString(shop) + "\n");
         }
         System.out.println("Укажите индекс элемента коллекции для изменения данных соответствующеего магазина из базы и после этого вводите новые данные: ");
         shops.set(CmdLineGetInfo.cmdLineGetInt(), new Shop());
         System.out.println("Текущий полный список магазинов после редактирования базы: \n");
         for (Shop shop: shops) {
-            System.out.println(toString(shop));
-            System.out.println();
+            System.out.println(toString(shop) + "\n");
         }
+        System.out.println();
     }
 
     @Override
@@ -54,10 +52,10 @@ public class ShopServiceImpl implements ShopService {
         String name = CmdLineGetInfo.cmdLineGetString();
         for (Shop shop: shops) {
             if(name.equals(shop.getShopName())){
-                System.out.println("Найдено совпадение: \n");
-                System.out.println(toString(shop));
+                System.out.println("Найдено совпадение: \n" + toString(shop));
             }else System.out.println("Совпадений не найдено!");
         }
+        System.out.println();
     }
 
     @Override

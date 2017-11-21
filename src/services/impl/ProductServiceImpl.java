@@ -13,6 +13,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void addProduct() {
         products.add(new Product());
+        System.out.println();
     }
 
     @Override
@@ -29,6 +30,7 @@ public class ProductServiceImpl implements ProductService{
             System.out.println(toString(product));
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override
@@ -45,6 +47,7 @@ public class ProductServiceImpl implements ProductService{
             System.out.println(toString(product));
             System.out.println();
         }
+        System.out.println();
     }
 
     @Override
@@ -53,16 +56,16 @@ public class ProductServiceImpl implements ProductService{
         String name = CmdLineGetInfo.cmdLineGetString();
         for (Product product: products) {
             if(name.equals(product.getProductName())){
-                System.out.println("Найдено совпадение: \n");
-                System.out.println(toString(product));
+                System.out.println("Найдено совпадение: \n" + toString(product));
             }else System.out.println("Совпадений не найдено!");
         }
+        System.out.println();
     }
 
     @Override
     public String toString(Product product){
         return "Название: " + product.getProductName() + "\n"
-                + "Стоимость: " + product.getProductValue() + "\n"
+                + "Стоимость: " + product.getProductValue() + " грн." + "\n"
                 + "ID продукта в базе магазина: " + product.hashCode() + "\n"
                 + "Вес еденицы продукта: " + product.getProductWeight() + " г." + "\n"
                 + "Объем единицы продукта: " + product.getProductVolume() + " см.куб." + "\n"

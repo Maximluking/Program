@@ -15,10 +15,10 @@ public class Shop {
         this.shopAdress = CmdLineGetInfo.cmdLineGetString();
         this.shopID = this.hashCode();
 
-        System.out.println("Вы добавили в базу следующий магазин:");
+        System.out.println("Вы добавили в базу следующий магазин: \n");
         System.out.println("Название: " + this.shopName);
         System.out.println("Адресс: " + this.shopAdress);
-        System.out.println("ID продукта в базе магазина: " + this.shopID);
+        System.out.println("ID магазина базе: " + this.shopID);
 
     }
 
