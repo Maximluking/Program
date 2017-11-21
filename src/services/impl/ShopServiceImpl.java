@@ -62,6 +62,7 @@ public class ShopServiceImpl implements ShopService {
     public String toString(Shop shop) {
         return "Название: " + shop.getShopName() + "\n"
                 + "Адресс: " + shop.getShopAdress() + "\n"
+                + "Индекс элемента в коллекции: № " + shops.indexOf(shop) + "\n"
                 + "ID магазина: " + shop.hashCode();
     }
 }
