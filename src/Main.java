@@ -28,7 +28,7 @@ public class Main {
                             case 1:
                                 clientService.addClient();
                                 System.out.println();
-                                continue;
+                                break;
                             case 2:
                                 clientService.removeClient();
                                 break;

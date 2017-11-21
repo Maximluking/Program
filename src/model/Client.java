@@ -19,7 +19,7 @@ public class Client {
         this.clientId = this.hashCode();
         System.out.println("Сколько клиенту полных лет:");
         this.clientAge = CmdLineGetInfo.cmdLineGetInt();
-        System.out.println("Количество наличных у клиента:");
+        System.out.println("Количество наличных у клиента в грн.:");
         this.clientMoney = CmdLineGetInfo.cmdLineGetInt();
         System.out.println("Введите номер мобильного телефона:");
         this.clientMobPhone = CmdLineGetInfo.cmdLineGetString();
