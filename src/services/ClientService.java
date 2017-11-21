@@ -1,6 +1,8 @@
 package services;
 
 
+import model.Client;
+
 public interface ClientService {
 
     void addClient();
@@ -11,4 +13,5 @@ public interface ClientService {
 
     void findClient();
 
+    String toString(Client client);
 }

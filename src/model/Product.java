@@ -7,7 +7,6 @@ public class Product {
     private double productValue;
     private double productWeight;
     private double productVolume;
-    private double productDiscount;
     private int productAgeManufacture;
 
     public Product(String productName, int productId, double productValue, double productWeight, double productVolume, double productDiscount, int productAgeManufacture) {
@@ -16,7 +15,6 @@ public class Product {
         this.productValue = productValue;
         this.productWeight = productWeight;
         this.productVolume = productVolume;
-        this.productDiscount = productDiscount;
         this.productAgeManufacture = productAgeManufacture;
     }
 
@@ -58,14 +56,6 @@ public class Product {
 
     public void setProductVolume(double productVolume) {
         this.productVolume = productVolume;
-    }
-
-    public double getProductDiscount() {
-        return productDiscount;
-    }
-
-    public void setProductDiscount(double productDiscount) {
-        this.productDiscount = productDiscount;
     }
 
     public int getProductAgeManufacture() {

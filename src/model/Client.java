@@ -8,25 +8,29 @@ public class Client {
     private String clientSurname;
     private int clientId;
     private int clientAge;
-    private double clientMoney;
-    private double clientDiscount;
+    private int clientMoney;
     private String clientMobPhone;
 
     public Client() {
-        //String clientName, String clientSurname, int clientId, int clientAge, double clientMoney, double clientDiscount, long clientMobPhone
         System.out.println("Введите имя нового клиента:");
-        this.clientName = CmdLineGetInfo.cmdLineGetString();//clientName;
+        this.clientName = CmdLineGetInfo.cmdLineGetString();
         System.out.println("Введите фамилию нового клиента:");
-        this.clientSurname = CmdLineGetInfo.cmdLineGetString();//clientSurname;
-        this.clientId = this.hashCode();//clientId;
+        this.clientSurname = CmdLineGetInfo.cmdLineGetString();
+        this.clientId = this.hashCode();
         System.out.println("Сколько клиенту полных лет:");
-        this.clientAge = CmdLineGetInfo.cmdLineGetInt();//clientAge;
+        this.clientAge = CmdLineGetInfo.cmdLineGetInt();
         System.out.println("Количество наличных у клиента:");
-        this.clientMoney = CmdLineGetInfo.cmdLineGetDouble();//clientMoney;
-        System.out.println("На какую скидку при покупке товара может расчитывать клиент(скидка вводится в пределах от 0.00 до 1.00):");
-        this.clientDiscount = CmdLineGetInfo.cmdLineGetDouble();//clientDiscount;
+        this.clientMoney = CmdLineGetInfo.cmdLineGetInt();
         System.out.println("Введите номер мобильного телефона:");
-        this.clientMobPhone = CmdLineGetInfo.cmdLineGetString();//clientMobPhone;
+        this.clientMobPhone = CmdLineGetInfo.cmdLineGetString();
+
+        System.out.println("Вы добавили в базу следующего клиента:");
+        System.out.println("Имя: " + this.clientName);
+        System.out.println("Фамилия: " + this.clientSurname);
+        System.out.println("ID клиента в базе магазина: " + this.clientId );
+        System.out.println("Возраст клиента: " + this.clientAge + " лет");
+        System.out.println("Доступные наличные: " + this.clientMoney + " $");
+        System.out.println("Телефон для связи: " + this.clientMobPhone);
     }
 
     public String getClientName() {
@@ -61,20 +65,12 @@ public class Client {
         this.clientAge = clientAge;
     }
 
-    public double getClientMoney() {
+    public int getClientMoney() {
         return clientMoney;
     }
 
-    public void setClientMoney(double clientMoney) {
+    public void setClientMoney(int clientMoney) {
         this.clientMoney = clientMoney;
-    }
-
-    public double getClientDiscount() {
-        return clientDiscount;
-    }
-
-    public void setClientDiscount(double clientDiscount) {
-        this.clientDiscount = clientDiscount;
     }
 
     public String  getClientMobPhone() {
