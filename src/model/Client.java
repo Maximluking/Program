@@ -1,12 +1,10 @@
 package model;
 
-import services.CmdLineGetInfo;
-
 public class Client {
 
+    private int clientId;
     private String clientName;
     private String clientSurname;
-    private int clientId;
     private int clientAge;
     private int clientMoney;
     private String clientMobPhone;

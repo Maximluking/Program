@@ -1,7 +1,6 @@
 package services.impl;
 
 import model.Product;
-import services.CmdLineGetInfo;
 import services.ProductService;
 import java.util.ArrayList;
 import java.util.List;

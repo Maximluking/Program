@@ -1,135 +1,153 @@
 package services;
 
-import services.impl.ClientServiceImpl;
-import services.impl.ProductServiceImpl;
-import services.impl.ShopServiceImpl;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class CmdLineService {
 
-    ClientService clientService = new ClientServiceImpl();
-    ProductService productService = new ProductServiceImpl();
-    ShopService shopService = new ShopServiceImpl();
+    private final BufferedReader reader;
+    private final ClientService clientService;
+    private final ProductService productService;
+    private final ShopService shopService;
 
-    public CmdLineService(){
+    public CmdLineService(ClientService clientService, ProductService productService, ShopService shopService) {
+        this.reader = new BufferedReader(new InputStreamReader(System.in));
+        this.shopService = shopService;
+        this.productService = productService;
+        this.clientService = clientService;
     }
 
-    public void showMainMenu(){
+    private static void showMainMenu(){
         System.out.println("1. Работа с клиентами");
         System.out.println("2. Работа с продуктом");
         System.out.println("3. Работа с торговой точкой");
         System.out.println("4. Выход из программы");
-
     }
-    public void showClientMenu(){
+
+    private static void showClientMenu(){
         System.out.println("1. Добавить нового клиента");
         System.out.println("2. Удалить клиента");
         System.out.println("3. Изменить данные клиента");
         System.out.println("4. Найти клиента по параметрам");
         System.out.println("5. Вернутся назад");
     }
-    public void showProductMenu(){
+
+    private static void showProductMenu(){
         System.out.println("1. Добавить новый продукт");
         System.out.println("2. Удалить продукт");
         System.out.println("3. Изменить данные продукта");
         System.out.println("4. Найти продукт по параметрам");
         System.out.println("5. Вернутся назад");
     }
-    public void showShopMenu(){
+
+    private static void showShopMenu(){
         System.out.println("1. Добавить новый магазин");
         System.out.println("2. Удалить магазин");
         System.out.println("3. Изменить данные магазина");
         System.out.println("4. Найти магазин по параметрам");
         System.out.println("5. Вернутся назад");
     }
-    public int readCommand(){
-       return CmdLineGetInfo.cmdLineGetInt();
-    }
 
-    public void menuStart(){
+
+    private void mainMenu() throws IOException {
         boolean isWork = true;
         do {
             showMainMenu();
-            int s = readCommand();
+            String s = reader.readLine();
             switch (s){
-                case 1:
-                    while (isWork==true) {
-                        showClientMenu();
-                        int s1 = readCommand();
-                        switch (s1) {
-                            case 1:
-                                clientService.addClient();
-                                System.out.println();
-                                break;
-                            case 2:
-                                clientService.removeClient();
-                                break;
-                            case 3:
-                                clientService.modifyClient();
-                                break;
-                            case 4:
-                                clientService.findClient();
-                                break;
-                            case 5:
-                                isWork = false;
-                            default:
-                                System.out.println("Неправильный ввод \n");
-                        }
-                    }
-                    isWork = true;
-                    continue;
-                case 2:
-                    while (isWork==true) {
-                        showProductMenu();
-                        int s2 = readCommand();
-                        switch (s2) {
-                            case 1:
-                                productService.addProduct();
-                                break;
-                            case 2:
-                                productService.removeProduct();
-                                break;
-                            case 3:
-                                productService.modifyProduct();
-                                break;
-                            case 4:
-                                productService.findProduct();
-                                break;
-                            case 5:
-                                isWork = false;
-                            default:
-                                System.out.println("Неправильный ввод \n");
-                        }
-                    }
-                    isWork = true;
-                    continue;
-                case 3:
-                    while (isWork == true) {
-                        showShopMenu();
-                        int s3 = readCommand();
-                        switch (s3) {
-                            case 1:
-                                shopService.addShop();
-                                break;
-                            case 2:
-                                shopService.removeShop();
-                                break;
-                            case 3:
-                                shopService.modifyShop();
-                                break;
-                            case 4:
-                                shopService.findShop();
-                                break;
-                            case 5:
-                                isWork = false;
-                            default:
-                                System.out.println("Неправильный ввод \n");
-                        }
-                    }
-                    isWork = true;
-                    continue;
-                case 4:
+                case "1":
+                    clientMenu();
+                    break;
+                case "2":
+                    productMenu();
+                    break;
+                case "3":
+                    shopMenu();
+                    break;
+                case "4":
                     isWork = false;
                     break;
+                default:
+                    System.out.println("Неправильный ввод \n");
+            }
+        }
+        while (isWork);
+    }
+    private void clientMenu() throws IOException {
+        boolean isWork = true;
+        do {
+            showClientMenu();
+            String s = reader.readLine();
+            switch (s) {
+                case "1":
+                    clientService.addClient();
+                    break;
+                case "2":
+                    clientService.removeClient();
+                    break;
+                case "3":
+                    clientService.modifyClient();
+                    break;
+                case "4":
+                    clientService.findClient();
+                    break;
+                case "5":
+                    isWork = false;
+                default:
+                    System.out.println("Неправильный ввод \n");
+            }
+        }
+        while (isWork);
+    }
+
+    private void productMenu() throws IOException {
+        boolean isWork = true;
+        do {
+            showProductMenu();
+            String s = reader.readLine();
+            switch (s) {
+                case "1":
+                    productService.addProduct();
+                    break;
+                case "2":
+                    productService.removeProduct();
+                    break;
+                case "3":
+                    productService.modifyProduct();
+                    break;
+                case "4":
+                    productService.findProduct();
+                    break;
+                case "5":
+                    isWork = false;
+                default:
+                    System.out.println("Неправильный ввод \n");
+            }
+        }
+        while (isWork);
+    }
+
+    private void shopMenu() throws IOException {
+        boolean isWork = true;
+        do {
+            showShopMenu();
+            String s = reader.readLine();
+            switch (s) {
+                case "1":
+                    shopService.addShop();
+                    break;
+                case "2":
+                    shopService.removeShop();
+                    break;
+                case "3":
+                    shopService.modifyShop();
+                    break;
+                case "4":
+                    shopService.findShop();
+                    break;
+                case "5":
+                    isWork = false;
                 default:
                     System.out.println("Неправильный ввод \n");
             }

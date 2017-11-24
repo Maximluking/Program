@@ -1,7 +1,5 @@
 package model;
 
-import services.CmdLineGetInfo;
-
 public class Shop {
 
     private String shopName;
