@@ -2,9 +2,11 @@ package services;
 
 import model.Product;
 
+import java.io.IOException;
+
 public interface ProductService {
 
-    void addProduct();
+    void addProduct() throws IOException;
 
     void removeProduct();
 
@@ -12,6 +14,6 @@ public interface ProductService {
 
     void findProduct();
 
-   // String toString(Product product);
+    String toString(Product product);
 
 }

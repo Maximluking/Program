@@ -1,7 +1,5 @@
 package services;
 
-import model.Client;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -68,7 +66,7 @@ public class CmdLineService {
             String s = reader.readLine();
             switch (s) {
                 case "1":
-                    clientService.serviceGetNewClient();
+                    clientService.addClient();
                     break;
                 case "2":
                     clientService.removeClient();

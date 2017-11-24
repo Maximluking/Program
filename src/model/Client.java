@@ -2,13 +2,11 @@ package model;
 
 public class Client {
 
-    private int clientId;
     private String clientName;
     private String clientSurname;
     private int clientAge;
 
-    public Client(int clientId, String clientName, String clientSurname, int clientAge) {
-        this.clientId = clientId;
+    public Client(String clientName, String clientSurname, int clientAge) {
         this.clientName = clientName;
         this.clientSurname = clientSurname;
         this.clientAge = clientAge;
@@ -28,14 +26,6 @@ public class Client {
 
     public void setClientSurname(String clientSurname) {
         this.clientSurname = clientSurname;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
     }
 
     public int getClientAge() {
