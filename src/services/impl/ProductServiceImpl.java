@@ -11,13 +11,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void addProduct() {
-        products.add(new Product());
-        System.out.println();
+       /* products.add(new Product());
+        System.out.println();*/
     }
 
     @Override
     public void removeProduct() {
-        System.out.println("Текущий полный список продуктов магазина: \n");
+        /*System.out.println("Текущий полный список продуктов магазина: \n");
         for (Product product: products) {
             System.out.println(toString(product));
             System.out.println();
@@ -29,12 +29,12 @@ public class ProductServiceImpl implements ProductService{
             System.out.println(toString(product));
             System.out.println();
         }
-        System.out.println();
+        System.out.println();*/
     }
 
     @Override
     public void modifyProduct() {
-        System.out.println("Текущий полный список продуктов магазина:");
+       /* System.out.println("Текущий полный список продуктов магазина:");
         for (Product product: products) {
             System.out.println(toString(product));
             System.out.println();
@@ -46,22 +46,22 @@ public class ProductServiceImpl implements ProductService{
             System.out.println(toString(product));
             System.out.println();
         }
-        System.out.println();
+        System.out.println();*/
     }
 
     @Override
     public void findProduct() {
-        System.out.println("Введите название искомого продукта: \n");
+       /* System.out.println("Введите название искомого продукта: \n");
         String name = CmdLineGetInfo.cmdLineGetString();
         for (Product product: products) {
             if(name.equals(product.getProductName())){
                 System.out.println("Найдено совпадение: \n" + toString(product));
             }else System.out.println("Совпадений не найдено!");
         }
-        System.out.println();
+        System.out.println();*/
     }
 
-    @Override
+   /* @Override
     public String toString(Product product){
         return "Название: " + product.getProductName() + "\n"
                 + "Стоимость: " + product.getProductValue() + " грн." + "\n"
@@ -70,5 +70,5 @@ public class ProductServiceImpl implements ProductService{
                 + "Вес еденицы продукта: " + product.getProductWeight() + " г." + "\n"
                 + "Объем единицы продукта: " + product.getProductVolume() + " см.куб." + "\n"
                 + "Дата изготовления данной единицы продукта: " + product.getProductAgeManufacture();
-    }
+    }*/
 }

@@ -12,6 +12,6 @@ public interface ProductService {
 
     void findProduct();
 
-    String toString(Product product);
+   // String toString(Product product);
 
 }

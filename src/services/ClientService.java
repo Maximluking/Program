@@ -5,7 +5,7 @@ import model.Client;
 
 public interface ClientService {
 
-    void addClient();
+    void addClient(/*Client client*/);
 
     void removeClient();
 
@@ -13,5 +13,5 @@ public interface ClientService {
 
     void findClient();
 
-    String toString(Client client);
+   // String toString(Client client);
 }

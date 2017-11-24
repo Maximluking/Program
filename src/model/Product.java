@@ -8,7 +8,16 @@ public class Product {
     private double productWeight;
     private double productVolume;
 
-    public Product() {
+    public Product(int productId, String productName, double productValue, double productWeight, double productVolume) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productValue = productValue;
+        this.productWeight = productWeight;
+        this.productVolume = productVolume;
+    }
+
+  /*  public Product() {
+
         System.out.println("Введите название для нового товара: ");
         this.productName = ;
         this.productId = this.hashCode();
@@ -27,7 +36,7 @@ public class Product {
         System.out.println("Вес еденицы продукта в граммах: " + this.productWeight + " г.");
         System.out.println("Объем единицы продукта в сантиметрах кубических: " + this.productVolume + " см.куб.");
         System.out.println("Дата изготовления данной единицы продукта: " + this.productAgeManufacture);
-    }
+    }*/
 
     public String getProductName() {
         return productName;
