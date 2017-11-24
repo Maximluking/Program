@@ -1,7 +1,5 @@
 package model;
 
-import services.CmdLineService;
-
 public class Client {
 
     private int clientId;
@@ -15,16 +13,6 @@ public class Client {
         this.clientSurname = clientSurname;
         this.clientAge = clientAge;
     }
-
-    /*public Client() {
-        System.out.println("Вы добавили в базу следующего клиента: \n");
-        System.out.println("Имя: " + this.clientName);
-        System.out.println("Фамилия: " + this.clientSurname);
-        System.out.println("ID клиента в базе магазина: " + this.clientId );
-        System.out.println("Возраст клиента: " + this.clientAge + " лет");
-        System.out.println("Доступные наличные в грн.: " + this.clientMoney + " грн.");
-        System.out.println("Телефон для связи: " + this.clientMobPhone);
-    }*/
 
     public String getClientName() {
         return clientName;

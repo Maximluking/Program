@@ -13,7 +13,7 @@ public class  ClientServiceImpl implements ClientService {
 
     @Override
     public void addClient(Client client){
-        /*clients.add()*/
+        clients.add(client);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class CmdLineService {
             String s = reader.readLine();
             switch (s) {
                 case "1":
-                    clientService.addClient();
+                    serviceGetNewClient();
                     break;
                 case "2":
                     clientService.removeClient();
@@ -115,7 +115,7 @@ public class CmdLineService {
         while (isWork);
     }
 
-   /* public void serviceGetNewClient() throws IOException {
+    private void serviceGetNewClient() throws IOException {
         int id = this.hashCode();
         System.out.println("Введите имя нового клиента:\n");
         String name = reader.readLine();
@@ -124,5 +124,5 @@ public class CmdLineService {
         System.out.println("Сколько клиенту полных лет:\n");
         int age = Integer.parseInt(reader.readLine());
         clientService.addClient(new Client(id, name, surname, age));
-    }*/
+    }
 }
