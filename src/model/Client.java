@@ -6,21 +6,15 @@ public class Client {
     private String clientName;
     private String clientSurname;
     private int clientAge;
-    private int clientMoney;
-    private String clientMobPhone;
 
     public Client() {
         System.out.println("Введите имя нового клиента:");
-        this.clientName = CmdLineGetInfo.cmdLineGetString();
+        this.clientName = ;
         System.out.println("Введите фамилию нового клиента:");
-        this.clientSurname = CmdLineGetInfo.cmdLineGetString();
+        this.clientSurname = ;
         this.clientId = this.hashCode();
         System.out.println("Сколько клиенту полных лет:");
-        this.clientAge = CmdLineGetInfo.cmdLineGetInt();
-        System.out.println("Количество наличных у клиента в грн.:");
-        this.clientMoney = CmdLineGetInfo.cmdLineGetInt();
-        System.out.println("Введите номер мобильного телефона:");
-        this.clientMobPhone = CmdLineGetInfo.cmdLineGetString();
+        this.clientAge = ;
 
         System.out.println("Вы добавили в базу следующего клиента: \n");
         System.out.println("Имя: " + this.clientName);
@@ -63,19 +57,4 @@ public class Client {
         this.clientAge = clientAge;
     }
 
-    public int getClientMoney() {
-        return clientMoney;
-    }
-
-    public void setClientMoney(int clientMoney) {
-        this.clientMoney = clientMoney;
-    }
-
-    public String  getClientMobPhone() {
-        return clientMobPhone;
-    }
-
-    public void setClientMobPhone(String clientMobPhone) {
-        this.clientMobPhone = clientMobPhone;
-    }
 }

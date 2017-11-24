@@ -2,25 +2,23 @@ package model;
 
 public class Product {
 
-    private String productName;
     private int productId;
+    private String productName;
     private double productValue;
     private double productWeight;
     private double productVolume;
-    private String productAgeManufacture;
 
     public Product() {
         System.out.println("Введите название для нового товара: ");
-        this.productName = CmdLineGetInfo.cmdLineGetString();
+        this.productName = ;
         this.productId = this.hashCode();
         System.out.println("Введите стоимость еденицы продукта в грн.: ");
-        this.productValue = CmdLineGetInfo.cmdLineGetInt();
+        this.productValue = ;
         System.out.println("Введите вес единицы продукта в граммах: ");
-        this.productWeight = CmdLineGetInfo.cmdLineGetInt();
+        this.productWeight = ;
         System.out.println("Введите объем единицы продуктав см.куб.: ");
-        this.productVolume = CmdLineGetInfo.cmdLineGetInt();
+        this.productVolume = ;
         System.out.println("Введите дату изготовления данной единицы продукта: ");
-        this.productAgeManufacture = CmdLineGetInfo.cmdLineGetString();
 
         System.out.println("Вы добавили в базу следующий продукт: \n");
         System.out.println("Название: " + this.productName);
@@ -69,13 +67,5 @@ public class Product {
 
     public void setProductVolume(double productVolume) {
         this.productVolume = productVolume;
-    }
-
-    public String getProductAgeManufacture() {
-        return productAgeManufacture;
-    }
-
-    public void setProductAgeManufacture(String productAgeManufacture) {
-        this.productAgeManufacture = productAgeManufacture;
     }
 }

@@ -9,11 +9,9 @@ public class CmdLineService {
     private final BufferedReader reader;
     private final ClientService clientService;
     private final ProductService productService;
-    private final ShopService shopService;
 
-    public CmdLineService(ClientService clientService, ProductService productService, ShopService shopService) {
+    public CmdLineService(ClientService clientService, ProductService productService) {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
-        this.shopService = shopService;
         this.productService = productService;
         this.clientService = clientService;
     }
@@ -21,8 +19,7 @@ public class CmdLineService {
     private static void showMainMenu(){
         System.out.println("1. Работа с клиентами");
         System.out.println("2. Работа с продуктом");
-        System.out.println("3. Работа с торговой точкой");
-        System.out.println("4. Выход из программы");
+        System.out.println("3. Выход из программы");
     }
 
     private static void showClientMenu(){
@@ -41,16 +38,7 @@ public class CmdLineService {
         System.out.println("5. Вернутся назад");
     }
 
-    private static void showShopMenu(){
-        System.out.println("1. Добавить новый магазин");
-        System.out.println("2. Удалить магазин");
-        System.out.println("3. Изменить данные магазина");
-        System.out.println("4. Найти магазин по параметрам");
-        System.out.println("5. Вернутся назад");
-    }
-
-
-    private void mainMenu() throws IOException {
+    public void mainMenu() throws IOException {
         boolean isWork = true;
         do {
             showMainMenu();
@@ -63,9 +51,6 @@ public class CmdLineService {
                     productMenu();
                     break;
                 case "3":
-                    shopMenu();
-                    break;
-                case "4":
                     isWork = false;
                     break;
                 default:
@@ -118,33 +103,6 @@ public class CmdLineService {
                     break;
                 case "4":
                     productService.findProduct();
-                    break;
-                case "5":
-                    isWork = false;
-                default:
-                    System.out.println("Неправильный ввод \n");
-            }
-        }
-        while (isWork);
-    }
-
-    private void shopMenu() throws IOException {
-        boolean isWork = true;
-        do {
-            showShopMenu();
-            String s = reader.readLine();
-            switch (s) {
-                case "1":
-                    shopService.addShop();
-                    break;
-                case "2":
-                    shopService.removeShop();
-                    break;
-                case "3":
-                    shopService.modifyShop();
-                    break;
-                case "4":
-                    shopService.findShop();
                     break;
                 case "5":
                     isWork = false;
