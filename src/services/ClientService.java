@@ -10,7 +10,7 @@ public interface ClientService {
 
     void removeClient() throws IOException;
 
-    void modifyClient();
+    void modifyClient() throws IOException;
 
     void findClient();
 

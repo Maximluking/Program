@@ -50,16 +50,26 @@ public class  ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void modifyClient() {
+    public void modifyClient() throws IOException {
         System.out.println("Все клиенты базы:\n");
         for(Map.Entry<Integer, Client> client : clients.entrySet()){
             System.out.printf("Id клиента: %s\n" + "ИНФО. %s\n", client.getKey(), toString(client.getValue()));
             System.out.println();
         }
         if(clients.isEmpty()){
-            System.out.println("Удалять нечего, база пуста!\n");
+            System.out.println("Изменять нечего, база пуста!\n");
         }else {
-            System.out.println("Введите id клиента на удаление из базы:\n");
+            System.out.println("Введите id клиента для изменения ИНФО из базы:\n");
+            try {
+                int id = Integer.parseInt(reader.readLine());
+                if (clients.containsKey(id)) {
+                    //do something
+
+
+                } else System.out.println("Клиента с таким id нет в базе!\n");
+            } catch (NumberFormatException err) {
+                System.out.println("Вы ввели недопустимые значения!\n");
+            }
         }
     }
 
