@@ -5,14 +5,14 @@ import services.ClientService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class  ClientServiceImpl implements ClientService {
 
     private BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
-    private List<Client> clients = new ArrayList<>();
+    private Map<Integer, Client> clients = new HashMap<>();
 
     @Override
     public void addClient() throws IOException {
@@ -23,9 +23,9 @@ public class  ClientServiceImpl implements ClientService {
         System.out.println("Сколько клиенту полных лет:\n");
         int age = Integer.parseInt(reader.readLine());
         int id = this.hashCode();
-        clients.add(new Client(id, name, surname, age));
+        clients.put(id, new Client(id, name, surname, age));
         System.out.println("Вы добавили нового клиента с полями:\n");
-
+        System.out.println(clients.get(id).toString());
     }
 
     @Override
@@ -47,7 +47,6 @@ public class  ClientServiceImpl implements ClientService {
         return "Имя: " + client.getClientName()+ "\n"
                 + "Фамилия: " + client.getClientSurname() + "\n"
                 + "ID клиента в базе магазина: " + client.getClientId() + "\n"
-                + "Индекс элемента в коллекции: № " + clients.indexOf(client) + "\n"
                 + "Возраст клиента: " + client.getClientAge() + " лет";
     }
 }
