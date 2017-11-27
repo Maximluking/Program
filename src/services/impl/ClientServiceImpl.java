@@ -22,7 +22,10 @@ public class  ClientServiceImpl implements ClientService {
         String surname = reader.readLine();
         System.out.println("Сколько клиенту полных лет:\n");
         int age = Integer.parseInt(reader.readLine());
-        clients.add(new Client(name, surname, age));
+        int id = this.hashCode();
+        clients.add(new Client(id, name, surname, age));
+        System.out.println("Вы добавили нового клиента с полями:\n");
+
     }
 
     @Override
@@ -43,7 +46,7 @@ public class  ClientServiceImpl implements ClientService {
     public String toString(Client client){
         return "Имя: " + client.getClientName()+ "\n"
                 + "Фамилия: " + client.getClientSurname() + "\n"
-                + "ID клиента в базе магазина: " + client.hashCode() + "\n"
+                + "ID клиента в базе магазина: " + client.getClientId() + "\n"
                 + "Индекс элемента в коллекции: № " + clients.indexOf(client) + "\n"
                 + "Возраст клиента: " + client.getClientAge() + " лет";
     }
