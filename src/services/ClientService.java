@@ -8,7 +8,7 @@ public interface ClientService {
 
     void addClient() throws IOException;
 
-    void removeClient();
+    void removeClient() throws IOException;
 
     void modifyClient();
 
