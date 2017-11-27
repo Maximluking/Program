@@ -22,32 +22,45 @@ public class  ClientServiceImpl implements ClientService {
         String surname = reader.readLine();
         System.out.println("Сколько клиенту полных лет:");
         int age = Integer.parseInt(reader.readLine());
-        int id = age*20;
-        clients.put(age, new Client(id, name, surname, age));
-        System.out.println("Вы добавили в базу клиента:");
-
-
+        Client client = new Client(name, surname, age);
+        clients.put(client.hashCode(), client);
+        System.out.println("Вы добавили в базу клиента:\n" + toString(client) + "\n");
     }
 
     @Override
     public void removeClient() throws IOException {
-        System.out.println("Все клиенты базы:");
+        System.out.println("Все клиенты базы:\n");
         for(Map.Entry<Integer, Client> client : clients.entrySet()){
-            System.out.printf("Ключ: %s  Клиент: %s \n", client.getKey(), toString(client.getValue()));
+            System.out.printf("Id клиента: %s\n" + "ИНФО. %s\n", client.getKey(), toString(client.getValue()));
+            System.out.println();
         }
         if(clients.isEmpty()){
-            System.out.println("Удалять нечего, база пуста");
+            System.out.println("Удалять нечего, база пуста!\n");
         }else {
-            System.out.println("Введите id клиента на удаление из базы:");
-            int id = Integer.parseInt(reader.readLine());
-            if(clients.containsKey(id)){clients.remove(id);}
-            else System.out.println("Клиента с таким id ет в базе!");
+            System.out.println("Введите id клиента на удаление из базы:\n");
+            try {
+                int id = Integer.parseInt(reader.readLine());
+                if(clients.containsKey(id)){clients.remove(id);}
+                else System.out.println("Клиента с таким id нет в базе!\n");
+            }
+            catch (NumberFormatException err){
+                System.out.println("Вы ввели недопустимые значения!\n");
+            }
         }
     }
 
     @Override
     public void modifyClient() {
-
+        System.out.println("Все клиенты базы:\n");
+        for(Map.Entry<Integer, Client> client : clients.entrySet()){
+            System.out.printf("Id клиента: %s\n" + "ИНФО. %s\n", client.getKey(), toString(client.getValue()));
+            System.out.println();
+        }
+        if(clients.isEmpty()){
+            System.out.println("Удалять нечего, база пуста!\n");
+        }else {
+            System.out.println("Введите id клиента на удаление из базы:\n");
+        }
     }
 
     @Override
@@ -58,7 +71,7 @@ public class  ClientServiceImpl implements ClientService {
     public String toString(Client client){
         return "Имя: " + client.getClientName()+ "\n"
                 + "Фамилия: " + client.getClientSurname() + "\n"
-                + "ID клиента в базе магазина: " + client.getClientId() + "\n"
+                + "ID клиента в базе магазина: " + client.hashCode() + "\n"
                 + "Возраст клиента: " + client.getClientAge() + " лет";
     }
 }
