@@ -63,9 +63,28 @@ public class  ClientServiceImpl implements ClientService {
             try {
                 int id = Integer.parseInt(reader.readLine());
                 if (clients.containsKey(id)) {
-                    //do something
-
-
+                    Boolean flag = true;
+                    do {
+                        System.out.println("Выбирите параметр ИНФО для изменения:\n 1) Имя клиента.\n 2) Фамилия клиента.\n 3) Возраст клиента.\n 4) Выйти из меню изменений.\n");
+                        String s = reader.readLine();
+                        switch (s){
+                            case "1":
+                                clients.get(id).setClientName(reader.readLine());
+                                break;
+                            case "2":
+                                clients.get(id).setClientSurname(reader.readLine());
+                                break;
+                            case "3":
+                                clients.get(id).setClientAge(Integer.parseInt(reader.readLine()));
+                                break;
+                            case "4":
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("Введен недопустимый параметр!\n");
+                        }
+                        clients.put(id, clients.get(id));
+                    }while (flag);
                 } else System.out.println("Клиента с таким id нет в базе!\n");
             } catch (NumberFormatException err) {
                 System.out.println("Вы ввели недопустимые значения!\n");
