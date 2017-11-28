@@ -12,7 +12,7 @@ public interface ClientService {
 
     void modifyClient() throws IOException;
 
-    void findClient();
+    void findClient() throws IOException;
 
     String toString(Client client);
 }
