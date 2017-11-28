@@ -2,11 +2,10 @@ package services.impl;
 
 import model.Client;
 import services.ClientService;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Scanner;
 
 public class  ClientServiceImpl implements ClientService {
 
@@ -15,6 +14,7 @@ public class  ClientServiceImpl implements ClientService {
     private final File tempFile = new File(pathTempFile + "\\tempFile.txt");
     private BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
     private BufferedReader br = new BufferedReader(new FileReader(tempFile));
+    private Scanner scanner = new Scanner(new FileReader(tempFile));
     private Map<Integer, Client> clients = new HashMap<>();
 
     public ClientServiceImpl() throws IOException {
@@ -174,7 +174,6 @@ public class  ClientServiceImpl implements ClientService {
             try {
                 for (Map.Entry<Integer, Client> client : clients.entrySet()) {
                     bw.write(toStringSaveLoadFile(client.getValue()));
-                    bw.write(" ");
                 }
                 bw.close();
                 System.out.println("База успешно сохранена по адрессу: " + pathTempFile + "\\tempFile.txt\n");
@@ -185,23 +184,33 @@ public class  ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void loadClientBase() throws FileNotFoundException {
+    public void loadClientBase() throws IOException {
+        System.out.println("База загружена из файла:\n");
+        while (br.readLine()!=null){
+            clients.put(scanner.nextInt(), new Client(scanner.next(), scanner.next(), scanner.nextInt()));
+            scanner.nextLine();
+            }
+    }
 
+    @Override
+    public void clearClientBase() {
+        System.out.println("База успешно очищена!\n");
+        clients.clear();
     }
 
     @Override
     public String toString(Client client){
-        return "Имя: " + client.getClientName()+ "\n "
-                + "Фамилия: " + client.getClientSurname() + "\n "
-                + "ID клиента в базе магазина: " + client.hashCode() + "\n "
-                + "Возраст клиента: " + client.getClientAge() + " лет\n ";
+        return "Имя: " + client.getClientName()+ "\n"
+                + "Фамилия: " + client.getClientSurname() + "\n"
+                + "ID клиента в базе магазина: " + client.hashCode() + "\n"
+                + "Возраст клиента: " + client.getClientAge() + " лет\n";
     }
 
     @Override
     public String toStringSaveLoadFile(Client client){
-        return "Name " + client.getClientName()+ "\n "
-                + "Surname " + client.getClientSurname() + "\n "
-                + "ID " + client.hashCode() + "\n "
-                + "Age " + client.getClientAge() + "\n ";
+        return client.hashCode() + " "
+                + client.getClientName()+ " "
+                + client.getClientSurname() + " "
+                + client.getClientAge() + "\r\n";
     }
 }

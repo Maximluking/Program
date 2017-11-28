@@ -29,7 +29,8 @@ public class CmdLineService {
         System.out.println("4. Найти клиента по параметрам");
         System.out.println("5. Сохранить базу клиентов в файл");
         System.out.println("6. Загрузить базу клиентов из файла");
-        System.out.println("7. Вернутся назад");
+        System.out.println("7. Очистить базу клиентов");
+        System.out.println("8. Вернутся назад");
     }
 
     private static void showProductMenu(){
@@ -88,6 +89,9 @@ public class CmdLineService {
                     clientService.loadClientBase();
                     break;
                 case "7":
+                    clientService.clearClientBase();
+                    break;
+                case "8":
                     isWork = false;
                 default:
                     System.out.println("Неправильный ввод \n");

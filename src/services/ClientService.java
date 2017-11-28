@@ -17,6 +17,8 @@ public interface ClientService {
 
     void loadClientBase() throws IOException;
 
+    void clearClientBase();
+
     String toString(Client client);
 
     String toStringSaveLoadFile(Client client);
