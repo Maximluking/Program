@@ -3,6 +3,7 @@ package services.impl;
 import model.Product;
 import services.ProductService;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -40,7 +41,17 @@ public class ProductServiceImpl implements ProductService{
     public void findProduct() {
     }
 
-   @Override
+    @Override
+    public void saveProductBase() throws FileNotFoundException {
+
+    }
+
+    @Override
+    public void loadProductBase() throws FileNotFoundException {
+
+    }
+
+    @Override
     public String toString(Product product){
         return "Название: " + product.getProductName() + "\n"
                 + "Количество едениц данното товара: " + product.getNumber() + "\n"

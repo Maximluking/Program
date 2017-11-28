@@ -2,9 +2,8 @@ package services.impl;
 
 import model.Client;
 import services.ClientService;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,7 +102,7 @@ public class  ClientServiceImpl implements ClientService {
     @Override
     public void findClient() throws IOException {
         if(clients.isEmpty()){
-            System.out.println("База пуста, искать нечего!");
+            System.out.println("База пуста, искать нечего!\n");
         }else{
             Boolean flag = true;
             Boolean containsParam = false;
@@ -158,6 +157,31 @@ public class  ClientServiceImpl implements ClientService {
                 }
             }while (flag);
         }
+    }
+
+    @Override
+    public void saveClientBase() throws IOException {
+        if(clients.isEmpty()){
+            System.out.println("Сохранять нечего, база пуста!\n");
+        }else{
+            try {
+                String pathTempFile = new File("").getAbsolutePath();
+                File tempFile = new File(pathTempFile + "\\tempFile.txt");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+                for (Map.Entry<Integer, Client> client : clients.entrySet()) {
+                    bw.write(toString(client.getValue()) + "\n");
+                }
+                bw.close();
+            } catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void loadClientBase() throws FileNotFoundException {
+
+
     }
 
     @Override

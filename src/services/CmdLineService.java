@@ -27,7 +27,9 @@ public class CmdLineService {
         System.out.println("2. Удалить клиента");
         System.out.println("3. Изменить данные клиента");
         System.out.println("4. Найти клиента по параметрам");
-        System.out.println("5. Вернутся назад");
+        System.out.println("5. Сохранить базу клиентов в файл");
+        System.out.println("6. Загрузить базу клиентов из файла");
+        System.out.println("7. Вернутся назад");
     }
 
     private static void showProductMenu(){
@@ -35,7 +37,9 @@ public class CmdLineService {
         System.out.println("2. Удалить продукт");
         System.out.println("3. Изменить данные продукта");
         System.out.println("4. Найти продукт по параметрам");
-        System.out.println("5. Вернутся назад");
+        System.out.println("5. Сохранить базу клиентов в файл");
+        System.out.println("6. Загрузить базу клиентов из файла");
+        System.out.println("7. Вернутся назад");
     }
 
     public void mainMenu() throws IOException {
@@ -78,6 +82,12 @@ public class CmdLineService {
                     clientService.findClient();
                     break;
                 case "5":
+                    clientService.saveClientBase();
+                    break;
+                case "6":
+                    clientService.loadClientBase();
+                    break;
+                case "7":
                     isWork = false;
                 default:
                     System.out.println("Неправильный ввод \n");
@@ -105,6 +115,12 @@ public class CmdLineService {
                     productService.findProduct();
                     break;
                 case "5":
+                    productService.saveProductBase();
+                    break;
+                case "6":
+                    productService.loadProductBase();
+                    break;
+                case "7":
                     isWork = false;
                 default:
                     System.out.println("Неправильный ввод \n");

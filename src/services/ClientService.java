@@ -1,7 +1,6 @@
 package services;
 
 import model.Client;
-
 import java.io.IOException;
 
 public interface ClientService {
@@ -13,6 +12,10 @@ public interface ClientService {
     void modifyClient() throws IOException;
 
     void findClient() throws IOException;
+
+    void saveClientBase() throws IOException;
+
+    void loadClientBase() throws IOException;
 
     String toString(Client client);
 }
