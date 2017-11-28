@@ -18,4 +18,6 @@ public interface ClientService {
     void loadClientBase() throws IOException;
 
     String toString(Client client);
+
+    String toStringSaveLoadFile(Client client);
 }
