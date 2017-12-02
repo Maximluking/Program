@@ -1,19 +1,24 @@
 package model;
 
 public class Product {
-
+    private int productId;
     private String productName;
-    private int number;
-    private double productValue;
-    private double productWeight;
-    private double productVolume;
+    private int productNumber;
+    private int productValue;
+    private int productWeight;
+    private int productVolume;
 
-    public Product(String productName, int number, double productValue, double productWeight, double productVolume) {
+    public Product(int productId, String productName, int productNumber, int productValue, int productWeight, int productVolume) {
+        this.productId = productId;
         this.productName = productName;
-        this.number = number;
+        this.productNumber = productNumber;
         this.productValue = productValue;
         this.productWeight = productWeight;
         this.productVolume = productVolume;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 
     public String getProductName() {
@@ -24,35 +29,39 @@ public class Product {
         this.productName = productName;
     }
 
-    public int getNumber() {
-        return number;
+    public int getProductNumber() {
+        return productNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setProductNumber(int productNumber) {
+        this.productNumber = productNumber;
     }
 
-    public double getProductValue() {
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getProductValue() {
         return productValue;
     }
 
-    public void setProductValue(double productValue) {
+    public void setProductValue(int productValue) {
         this.productValue = productValue;
     }
 
-    public double getProductWeight() {
+    public int getProductWeight() {
         return productWeight;
     }
 
-    public void setProductWeight(double productWeight) {
+    public void setProductWeight(int productWeight) {
         this.productWeight = productWeight;
     }
 
-    public double getProductVolume() {
+    public int getProductVolume() {
         return productVolume;
     }
 
-    public void setProductVolume(double productVolume) {
+    public void setProductVolume(int productVolume) {
         this.productVolume = productVolume;
     }
 }

@@ -7,6 +7,8 @@ public interface ClientService {
 
     void addClient() throws IOException;
 
+    void showAllClients();
+
     void removeClient() throws IOException;
 
     void modifyClient() throws IOException;
@@ -19,7 +21,9 @@ public interface ClientService {
 
     void clearClientBase();
 
-    String toString(Client client);
+    String clientToString(Client client);
 
-    String toStringSaveLoadFile(Client client);
+    String baseConvertToFile(Client client);
+
+    int readNumber() throws IOException;
 }

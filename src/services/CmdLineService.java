@@ -17,30 +17,33 @@ public class CmdLineService {
     }
 
     private static void showMainMenu(){
-        System.out.println("1. Работа с клиентами");
-        System.out.println("2. Работа с продуктом");
-        System.out.println("3. Выход из программы");
+        System.out.println("1. Clients");
+        System.out.println("2. Products");
+        System.out.println("3. Exit");
     }
 
     private static void showClientMenu(){
-        System.out.println("1. Добавить нового клиента");
-        System.out.println("2. Удалить клиента");
-        System.out.println("3. Изменить данные клиента");
-        System.out.println("4. Найти клиента по параметрам");
-        System.out.println("5. Сохранить базу клиентов в файл");
-        System.out.println("6. Загрузить базу клиентов из файла");
-        System.out.println("7. Очистить базу клиентов");
-        System.out.println("8. Вернутся назад");
+        System.out.println("1. Add client");
+        System.out.println("2. Show all clients");
+        System.out.println("3. Remove client");
+        System.out.println("4. Change INFO of client");
+        System.out.println("5. Find client");
+        System.out.println("6. Save BASE to file");
+        System.out.println("7. Load BASE from file");
+        System.out.println("8. Clear BASE in RAM");
+        System.out.println("9. Go back");
     }
 
     private static void showProductMenu(){
-        System.out.println("1. Добавить новый продукт");
-        System.out.println("2. Удалить продукт");
-        System.out.println("3. Изменить данные продукта");
-        System.out.println("4. Найти продукт по параметрам");
-        System.out.println("5. Сохранить базу клиентов в файл");
-        System.out.println("6. Загрузить базу клиентов из файла");
-        System.out.println("7. Вернутся назад");
+        System.out.println("1. Add product");
+        System.out.println("2. Show all products");
+        System.out.println("3. Remove product");
+        System.out.println("4. Change INFO of product");
+        System.out.println("5. Find product");
+        System.out.println("6. Save BASE to file");
+        System.out.println("7. Load BASE from file");
+        System.out.println("8. Clear BASE in RAM");
+        System.out.println("9. Go back");
     }
 
     public void mainMenu() throws IOException {
@@ -59,7 +62,7 @@ public class CmdLineService {
                     isWork = false;
                     break;
                 default:
-                    System.out.println("Неправильный ввод \n");
+                    System.out.println("Invalid input!\n");
             }
         }
         while (isWork);
@@ -74,27 +77,31 @@ public class CmdLineService {
                     clientService.addClient();
                     break;
                 case "2":
-                    clientService.removeClient();
+                    clientService.showAllClients();
                     break;
                 case "3":
-                    clientService.modifyClient();
+                    clientService.removeClient();
                     break;
                 case "4":
-                    clientService.findClient();
+                    clientService.modifyClient();
                     break;
                 case "5":
-                    clientService.saveClientBase();
+                    clientService.findClient();
                     break;
                 case "6":
-                    clientService.loadClientBase();
+                    clientService.saveClientBase();
                     break;
                 case "7":
-                    clientService.clearClientBase();
+                    clientService.loadClientBase();
                     break;
                 case "8":
+                    clientService.clearClientBase();
+                    break;
+                case "9":
                     isWork = false;
+                    break;
                 default:
-                    System.out.println("Неправильный ввод \n");
+                    System.out.println("Invalid input!\n");
             }
         }
         while (isWork);
@@ -110,24 +117,31 @@ public class CmdLineService {
                     productService.addProduct();
                     break;
                 case "2":
-                    productService.removeProduct();
+                    productService.showAllProducts();
                     break;
                 case "3":
-                    productService.modifyProduct();
+                    productService.removeProduct();
                     break;
                 case "4":
-                    productService.findProduct();
+                    productService.modifyProduct();
                     break;
                 case "5":
-                    productService.saveProductBase();
+                    productService.findProduct();
                     break;
                 case "6":
-                    productService.loadProductBase();
+                    productService.saveProductBase();
                     break;
                 case "7":
+                    productService.loadProductBase();
+                    break;
+                case "8":
+                    productService.clearProductBase();
+                    break;
+                case "9":
                     isWork = false;
+                    break;
                 default:
-                    System.out.println("Неправильный ввод \n");
+                    System.out.println("Invalid input!\n");
             }
         }
         while (isWork);

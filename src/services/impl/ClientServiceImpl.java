@@ -3,163 +3,151 @@ package services.impl;
 import model.Client;
 import services.ClientService;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class  ClientServiceImpl implements ClientService {
-
-    private BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
-    private String pathTempFile = new File("").getAbsolutePath();
-    private final File tempFile = new File(pathTempFile + "\\tempFile.txt");
-    private BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
-    private BufferedReader br = new BufferedReader(new FileReader(tempFile));
-    private Scanner scanner = new Scanner(new FileReader(tempFile));
-    private Map<Integer, Client> clients = new HashMap<>();
+    private BufferedReader reader;
+    private List<Client> clients;
+    private BufferedWriter bw;
+    private BufferedReader br;
 
     public ClientServiceImpl() throws IOException {
+        this.reader = new BufferedReader(new InputStreamReader(System.in));
+        this.clients = new ArrayList<>();
     }
 
     @Override
     public void addClient() throws IOException {
-        System.out.println("Введите имя нового клиента:");
+        System.out.println("Enter ID:");
+        int id = readNumber();
+        System.out.println("Enter name:");
         String name = reader.readLine();
-        System.out.println("Введите фамилию нового клиента:");
+        System.out.println("Enter surname:");
         String surname = reader.readLine();
-        System.out.println("Сколько клиенту полных лет:");
-        try {
-            int age = Integer.parseInt(reader.readLine());
-            Client client = new Client(name, surname, age);
-            clients.put(client.hashCode(), client);
-            System.out.println("Вы добавили в базу клиента:\n" + toString(client));
-        }catch (NumberFormatException err){
-            System.out.println("Вы ввели недопустимое значение!\n");
-            addClient();
-        }
-
+        System.out.println("Enter age:");
+        int age = readNumber();
+        clients.add(new Client(id, name, surname, age));
     }
 
     @Override
     public void removeClient() throws IOException {
-        System.out.println("Все клиенты базы:\n");
-        for(Map.Entry<Integer, Client> client : clients.entrySet()){
-            System.out.printf("Id клиента: %s\n" + "ИНФО. %s", client.getKey(), toString(client.getValue()));
-            System.out.println();
-        }
         if(clients.isEmpty()){
-            System.out.println("Удалять нечего, база пуста!\n");
+            System.out.println("Base empty!\n");
         }else {
-            System.out.println("Введите id клиента на удаление из базы:\n");
-            try {
-                int id = Integer.parseInt(reader.readLine());
-                if(clients.containsKey(id)){clients.remove(id);}
-                else System.out.println("Клиента с таким id нет в базе!\n");
+            System.out.println("Enter ID to DELETE from BASE:\n");
+            int id = readNumber();
+            Boolean flag = true;
+            for(Client client: clients){
+                if(client.getClientId() == id){
+                    clients.remove(client);
+                    System.out.printf("Client deleted\n");
+                    flag = false;
+                }
             }
-            catch (NumberFormatException err){
-                System.out.println("Вы ввели недопустимое значение!\n");
-            }
+            if(flag) System.out.println("there is no client with this ID\n");
         }
     }
 
     @Override
     public void modifyClient() throws IOException {
-        System.out.println("Все клиенты базы:\n");
-        for(Map.Entry<Integer, Client> client : clients.entrySet()){
-            System.out.printf("Id клиента: %s\n" + "ИНФО. %s", client.getKey(), toString(client.getValue()));
-            System.out.println();
-        }
         if(clients.isEmpty()){
-            System.out.println("Изменять нечего, база пуста!\n");
+            System.out.println("Base empty!\n");
         }else {
-            System.out.println("Введите id клиента для изменения ИНФО из базы:\n");
-            try {
-                int id = Integer.parseInt(reader.readLine());
-                if (clients.containsKey(id)) {
-                    Boolean flag = true;
+            System.out.println("Enter ID for change INFO:\n");
+            int id = readNumber();
+            Boolean flag = true;
+            for(Client client: clients) {
+                if (client.getClientId() == id) {
                     do {
-                        System.out.println("Выбирите параметр ИНФО для изменения:\n 1) Имя клиента.\n 2) Фамилия клиента.\n 3) Возраст клиента.\n 4) Выйти из меню изменений.\n");
+                        System.out.println("Select the parameter to change:\n 1) Name.\n 2) Surname.\n 3) Age.\n 4) Exit.\n");
                         String s = reader.readLine();
-                        switch (s){
+                        switch (s) {
                             case "1":
-                                System.out.println("Введите имя:");
-                                clients.get(id).setClientName(reader.readLine());
+                                System.out.println("Enter name:");
+                                client.setClientName(reader.readLine());
                                 break;
                             case "2":
-                                System.out.println("Введите фамилию:");
-                                clients.get(id).setClientSurname(reader.readLine());
+                                System.out.println("Enter surname:");
+                                client.setClientSurname(reader.readLine());
                                 break;
                             case "3":
-                                System.out.println("Введите возраст:");
-                                clients.get(id).setClientAge(Integer.parseInt(reader.readLine()));
+                                System.out.println("Enter age:");
+                                client.setClientAge(Integer.parseInt(reader.readLine()));
                                 break;
                             case "4":
                                 flag = false;
                                 break;
                             default:
-                                System.out.println("Введен недопустимый параметр!\n");
+                                System.out.println("Invalid input!\n");
                         }
-                    }while (flag);
-                } else System.out.println("Клиента с таким id нет в базе!\n");
-            } catch (NumberFormatException err) {
-                System.out.println("Вы ввели недопустимое значение!\n");
+                    } while (flag);
+                }
             }
+        if(flag) System.out.printf("Client with this ID = %s is not found\n", id);
         }
     }
 
     @Override
     public void findClient() throws IOException {
         if(clients.isEmpty()){
-            System.out.println("База пуста, искать нечего!\n");
+            System.out.println("Base empty!\n");
         }else{
             Boolean flag = true;
             Boolean containsParam = false;
             do{
-                System.out.println("Выбирете параметр для поиска:\n 1) Имя клиента.\n 2) Фамилия клиента.\n 3) Возраст клиента.\n 4) Выйти из меню поиска.\n");
+                System.out.println("Select the parameter to search:\n 1) ID.\n 2) Name.\n 3) Surname.\n 4) Age.\n 5) Exit.\n");
                 String s = reader.readLine();
                 switch (s) {
                     case "1":
-                        System.out.println("Введите имя:");
-                        String name = reader.readLine();
-                        for (Map.Entry<Integer, Client> client : clients.entrySet()) {
-                            if (name.equals(client.getValue().getClientName())) {
-                                System.out.println("Совпадение найдено:\n" + toString(client.getValue()));
+                        System.out.println("Enter ID:");
+                        int id = readNumber();
+                        for(Client client: clients) {
+                            if (client.getClientId() == id) {
+                                System.out.println("Coincidence:\n" + clientToString(client));
                                 containsParam = true;
                             }
                         }
                         break;
                     case "2":
-                        System.out.println("Введите фамилию:");
-                        String surname = reader.readLine();
-                        for (Map.Entry<Integer, Client> client : clients.entrySet()) {
-                            if (surname.equals(client.getValue().getClientSurname())) {
-                                System.out.println("Совпадение найдено:\n" + toString(client.getValue()));
+                        System.out.println("Enter name:");
+                        String name = reader.readLine();
+                        for(Client client: clients) {
+                            if (name.equals(client.getClientName())) {
+                                System.out.println("Coincidence:\n" + clientToString(client));
                                 containsParam = true;
                             }
                         }
                         break;
                     case "3":
-                        System.out.println("Введите возраст:");
-                        try {
-                            int age = Integer.parseInt(reader.readLine());
-
-                            for (Map.Entry<Integer, Client> client : clients.entrySet()) {
-                                if (age == client.getValue().getClientAge()) {
-                                    System.out.println("Совпадение найдено:\n" + toString(client.getValue()));
-                                    containsParam = true;
-                                }
+                        System.out.println("Enter surname:");
+                        String surname = reader.readLine();
+                        for (Client client: clients) {
+                            if (surname.equals(client.getClientSurname())) {
+                                System.out.println("Coincidence:\n" + clientToString(client));
+                                containsParam = true;
                             }
-                        }catch (NumberFormatException err){
-                            System.out.println("Введен недопустимый параметр!\n");
                         }
                         break;
                     case "4":
+                        System.out.println("Enter age:");
+                        int age = readNumber();
+                        for (Client client: clients) {
+                            if (age == client.getClientAge()) {
+                                System.out.println("Coincidence:\n" + clientToString(client));
+                                containsParam = true;
+                            }
+                        }
+                        break;
+                    case "5":
                         flag = false;
                         break;
                     default:
-                        System.out.println("Введен недопустимый параметр!\n");
+                        System.out.println("Invalid input!\n");
                 }
                 if(!containsParam) {
-                    System.out.println("По данному параметру клиент не найден!");
+                    System.out.println("Client not found!\n");
                     containsParam = true;
                 }
             }while (flag);
@@ -167,50 +155,83 @@ public class  ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void saveClientBase() throws IOException {
-        if(clients.isEmpty()){
-            System.out.println("Сохранять нечего, база пуста!\n");
-        }else{
-            try {
-                for (Map.Entry<Integer, Client> client : clients.entrySet()) {
-                    bw.write(toStringSaveLoadFile(client.getValue()));
-                }
-                bw.close();
-                System.out.println("База успешно сохранена по адрессу: " + pathTempFile + "\\tempFile.txt\n");
-            } catch (IOException ex){
-                System.out.println(ex.getMessage());
+    public void showAllClients(){
+        if(clients.isEmpty()) {
+            System.out.println("Base empty!\n");
+        }else {
+            System.out.println("All clients:\n");
+            for (Client client : clients) {
+                System.out.println(clientToString(client));
             }
         }
     }
 
     @Override
-    public void loadClientBase() throws IOException {
-        System.out.println("База загружена из файла:\n");
-        while (br.readLine()!=null){
-            clients.put(scanner.nextInt(), new Client(scanner.next(), scanner.next(), scanner.nextInt()));
-            scanner.nextLine();
+    public void saveClientBase() throws IOException {
+        if (clients.isEmpty()) {
+            System.out.println("Base empty!");
+            } else {
+                File tempFile = new File("ClientBase.txt");
+                bw = new BufferedWriter(new FileWriter(tempFile));
+                for (Client client : clients) {
+                    bw.write(baseConvertToFile(client));
+                    }
+                bw.close();
+                System.out.printf("BASE is saved successfully to file: %s\n", tempFile.getAbsolutePath());
             }
+    }
+
+
+    @Override
+    public void loadClientBase() throws IOException {
+        File tempFile = new File("ClientBase.txt");
+        br = new BufferedReader(new FileReader(tempFile));
+        String line;
+        while ((line = br.readLine())!=null){
+            int id = Integer.parseInt(line);
+            String name = br.readLine();
+            String surname = br.readLine();
+            int age = Integer.parseInt(br.readLine());
+            clients.add(new Client(id, name, surname, age));
+        }
+        br.close();
+        System.out.println("File is load successfully!\n");
     }
 
     @Override
     public void clearClientBase() {
-        System.out.println("База успешно очищена!\n");
+        System.out.println("Base clear successfully!\n");
         clients.clear();
     }
 
     @Override
-    public String toString(Client client){
-        return "Имя: " + client.getClientName()+ "\n"
-                + "Фамилия: " + client.getClientSurname() + "\n"
-                + "ID клиента в базе магазина: " + client.hashCode() + "\n"
-                + "Возраст клиента: " + client.getClientAge() + " лет\n";
+    public String clientToString(Client client){
+        return "ID: " + client.getClientId() + "\n"
+                + "Name: " + client.getClientName() + "\n"
+                + "Surname: " + client.getClientSurname() + "\n"
+                + "Age: " + client.getClientAge() + "\r\n";
     }
 
     @Override
-    public String toStringSaveLoadFile(Client client){
-        return client.hashCode() + " "
-                + client.getClientName()+ " "
-                + client.getClientSurname() + " "
+    public String baseConvertToFile(Client client){
+        return client.getClientId() + "\r\n"
+                + client.getClientName()+ "\r\n"
+                + client.getClientSurname() + "\r\n"
                 + client.getClientAge() + "\r\n";
     }
+
+    @Override
+    public int readNumber() throws IOException {
+        int id;
+        while (true) {
+            try {
+                id = Integer.valueOf(reader.readLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Enter the number!");
+            }
+        }
+        return id;
+    }
+
 }
