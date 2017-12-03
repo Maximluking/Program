@@ -20,10 +20,4 @@ public interface ClientService {
     void loadClientBase() throws IOException;
 
     void clearClientBase();
-
-    String clientToString(Client client);
-
-    String baseConvertToFile(Client client);
-
-    int readNumber() throws IOException;
 }

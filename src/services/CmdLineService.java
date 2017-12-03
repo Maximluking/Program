@@ -67,6 +67,7 @@ public class CmdLineService {
         }
         while (isWork);
     }
+
     private void clientMenu() throws IOException {
         boolean isWork = true;
         do {
@@ -146,5 +147,4 @@ public class CmdLineService {
         }
         while (isWork);
     }
-
 }

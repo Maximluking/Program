@@ -2,20 +2,22 @@ package services.impl;
 
 import model.Client;
 import services.ClientService;
+import services.FileApp;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 
 public class  ClientServiceImpl implements ClientService {
+    private FileApp fileApp;
     private BufferedReader reader;
     private List<Client> clients;
-    private BufferedWriter bw;
-    private BufferedReader br;
 
     public ClientServiceImpl() throws IOException {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
         this.clients = new ArrayList<>();
+        this.fileApp = new FileApp();
     }
 
     @Override
@@ -28,7 +30,16 @@ public class  ClientServiceImpl implements ClientService {
         String surname = reader.readLine();
         System.out.println("Enter age:");
         int age = readNumber();
-        clients.add(new Client(id, name, surname, age));
+        boolean flag = true;
+        for (Client client: clients) {
+            if(client.getClientId() == id){
+                client.setClientName(name);
+                client.setClientSurname(surname);
+                client.setClientAge(age);
+                flag = false;
+            }
+        }
+        if(flag){clients.add(new Client(id, name, surname, age));}
     }
 
     @Override
@@ -39,14 +50,17 @@ public class  ClientServiceImpl implements ClientService {
             System.out.println("Enter ID to DELETE from BASE:\n");
             int id = readNumber();
             Boolean flag = true;
-            for(Client client: clients){
-                if(client.getClientId() == id){
-                    clients.remove(client);
-                    System.out.printf("Client deleted\n");
-                    flag = false;
+            try {
+                for (Client client : clients) {
+                    if (client.getClientId() == id) {
+                        clients.remove(client);
+                        System.out.printf("Client deleted\n");
+                        flag = false;
+                    }
                 }
+                if (flag) System.out.println("there is no client with this ID\n");
+            }catch (ConcurrentModificationException err){
             }
-            if(flag) System.out.println("there is no client with this ID\n");
         }
     }
 
@@ -58,7 +72,7 @@ public class  ClientServiceImpl implements ClientService {
             System.out.println("Enter ID for change INFO:\n");
             int id = readNumber();
             Boolean flag = true;
-            for(Client client: clients) {
+            for (Client client: clients) {
                 if (client.getClientId() == id) {
                     do {
                         System.out.println("Select the parameter to change:\n 1) Name.\n 2) Surname.\n 3) Age.\n 4) Exit.\n");
@@ -74,7 +88,7 @@ public class  ClientServiceImpl implements ClientService {
                                 break;
                             case "3":
                                 System.out.println("Enter age:");
-                                client.setClientAge(Integer.parseInt(reader.readLine()));
+                                client.setClientAge(readNumber());
                                 break;
                             case "4":
                                 flag = false;
@@ -103,7 +117,7 @@ public class  ClientServiceImpl implements ClientService {
                     case "1":
                         System.out.println("Enter ID:");
                         int id = readNumber();
-                        for(Client client: clients) {
+                        for (Client client: clients){
                             if (client.getClientId() == id) {
                                 System.out.println("Coincidence:\n" + clientToString(client));
                                 containsParam = true;
@@ -113,7 +127,7 @@ public class  ClientServiceImpl implements ClientService {
                     case "2":
                         System.out.println("Enter name:");
                         String name = reader.readLine();
-                        for(Client client: clients) {
+                        for (Client client: clients) {
                             if (name.equals(client.getClientName())) {
                                 System.out.println("Coincidence:\n" + clientToString(client));
                                 containsParam = true;
@@ -168,34 +182,12 @@ public class  ClientServiceImpl implements ClientService {
 
     @Override
     public void saveClientBase() throws IOException {
-        if (clients.isEmpty()) {
-            System.out.println("Base empty!");
-            } else {
-                File tempFile = new File("ClientBase.txt");
-                bw = new BufferedWriter(new FileWriter(tempFile));
-                for (Client client : clients) {
-                    bw.write(baseConvertToFile(client));
-                    }
-                bw.close();
-                System.out.printf("BASE is saved successfully to file: %s\n", tempFile.getAbsolutePath());
-            }
+        fileApp.saveClientBase(clients);
     }
-
 
     @Override
     public void loadClientBase() throws IOException {
-        File tempFile = new File("ClientBase.txt");
-        br = new BufferedReader(new FileReader(tempFile));
-        String line;
-        while ((line = br.readLine())!=null){
-            int id = Integer.parseInt(line);
-            String name = br.readLine();
-            String surname = br.readLine();
-            int age = Integer.parseInt(br.readLine());
-            clients.add(new Client(id, name, surname, age));
-        }
-        br.close();
-        System.out.println("File is load successfully!\n");
+        fileApp.loadClientBase(clients);
     }
 
     @Override
@@ -204,24 +196,7 @@ public class  ClientServiceImpl implements ClientService {
         clients.clear();
     }
 
-    @Override
-    public String clientToString(Client client){
-        return "ID: " + client.getClientId() + "\n"
-                + "Name: " + client.getClientName() + "\n"
-                + "Surname: " + client.getClientSurname() + "\n"
-                + "Age: " + client.getClientAge() + "\r\n";
-    }
-
-    @Override
-    public String baseConvertToFile(Client client){
-        return client.getClientId() + "\r\n"
-                + client.getClientName()+ "\r\n"
-                + client.getClientSurname() + "\r\n"
-                + client.getClientAge() + "\r\n";
-    }
-
-    @Override
-    public int readNumber() throws IOException {
+    private int readNumber() throws IOException {
         int id;
         while (true) {
             try {
@@ -232,6 +207,13 @@ public class  ClientServiceImpl implements ClientService {
             }
         }
         return id;
+    }
+
+    private String clientToString(Client client){
+        return "ID: " + client.getClientId() + "\n"
+                + "Name: " + client.getClientName() + "\n"
+                + "Surname: " + client.getClientSurname() + "\n"
+                + "Age: " + client.getClientAge() + "\r\n";
     }
 
 }

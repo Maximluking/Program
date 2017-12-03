@@ -22,11 +22,4 @@ public interface ProductService {
     void loadProductBase() throws IOException;
 
     void clearProductBase();
-
-    String productToString(Product product);
-
-    String baseConvertToFile(Product product);
-
-    int readNumber() throws IOException;
-
 }

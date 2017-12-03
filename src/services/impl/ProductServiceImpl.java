@@ -1,22 +1,23 @@
 package services.impl;
 
 import model.Product;
+import services.FileApp;
 import services.ProductService;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
+    private FileApp fileApp;
     private BufferedReader reader;
     private List<Product> products;
-    private BufferedWriter bw;
-    private BufferedReader br;
-
 
     public ProductServiceImpl() {
         this.reader = new BufferedReader(new InputStreamReader(System.in));
         this.products = new ArrayList<>();
+        this.fileApp = new FileApp();
     }
 
     @Override
@@ -33,14 +34,27 @@ public class ProductServiceImpl implements ProductService{
         int weight = readNumber();
         System.out.println("Enter volume:");
         int volume = readNumber();
-        products.add(new Product(id, name, number, value, weight, volume));
+        boolean flag = true;
+        for (Product product: products) {
+            if(product.getProductId() == id){
+                product.setProductName(name);
+                product.setProductNumber(number);
+                product.setProductValue(value);
+                product.setProductWeight(weight);
+                product.setProductVolume(volume);
+                flag = false;
+            }
+        }
+        if(flag){
+            products.add(new Product(id, name, number, value, weight, volume));
+        }
     }
 
     @Override
-    public void showAllProducts(){
-        if(products.isEmpty()){
+    public void showAllProducts() {
+        if (products.isEmpty()) {
             System.out.println("Base empty!\n");
-        }else {
+        } else {
             System.out.println("All products:\n");
             for (Product product : products) {
                 System.out.println(productToString(product));
@@ -50,32 +64,35 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void removeProduct() throws IOException {
-        if(products.isEmpty()){
+        if (products.isEmpty()) {
             System.out.println("Base empty!\n");
-        }else {
+        } else {
             System.out.println("Enter ID to DELETE from BASE:\n");
             int id = readNumber();
             Boolean flag = true;
-            for(Product product: products){
-                if(product.getProductId() == id){
-                    products.remove(product);
-                    System.out.println("Product deleted");
-                    flag = false;
+            try {
+                for (Product product : products) {
+                    if (product.getProductId() == id) {
+                        products.remove(product);
+                        System.out.println("Product deleted");
+                        flag = false;
+                    }
                 }
+                if (flag) System.out.println("there is no product with this ID\n");
+            }catch (ConcurrentModificationException err){
             }
-            if(flag) System.out.println("there is no product with this ID\n");
         }
     }
 
     @Override
     public void modifyProduct() throws IOException {
-        if(products.isEmpty()){
+        if (products.isEmpty()) {
             System.out.println("Base empty!\n");
-        }else {
+        } else {
             System.out.println("Enter ID for change INFO:\n");
             int id = readNumber();
             Boolean flag = true;
-            for(Product product: products) {
+            for (Product product: products) {
                 if (product.getProductId() == id) {
                     do {
                         System.out.println("Select the parameter to change:\n 1) Name.\n 2) Number.\n 3) Value.\n 4) Weight.\n 5) Volume\n 6) Exit.\n");
@@ -110,25 +127,25 @@ public class ProductServiceImpl implements ProductService{
                     } while (flag);
                 }
             }
-            if(flag) System.out.printf("Product with this ID = %s is not found", id);
+            if (flag) System.out.printf("Product with this ID = %s is not found", id);
         }
     }
 
     @Override
     public void findProduct() throws IOException {
-        if(products.isEmpty()){
+        if (products.isEmpty()) {
             System.out.println("Base empty!\n");
-        }else{
+        } else {
             Boolean flag = true;
             Boolean containsParam = false;
-            do{
+            do {
                 System.out.println("Select the parameter to search:\n 1) ID.\n 2) Name.\n 3) Exit.\n");
                 String s = reader.readLine();
                 switch (s) {
                     case "1":
                         System.out.println("Enter ID:");
                         int id = readNumber();
-                        for(Product product: products) {
+                        for (Product product : products) {
                             if (product.getProductId() == id) {
                                 System.out.println("Coincidence:\n" + productToString(product));
                                 containsParam = true;
@@ -138,7 +155,7 @@ public class ProductServiceImpl implements ProductService{
                     case "2":
                         System.out.println("Enter name:");
                         String name = reader.readLine();
-                        for(Product product: products) {
+                        for (Product product : products) {
                             if (name.equals(product.getProductName())) {
                                 System.out.println("Coincidence:\n" + productToString(product));
                                 containsParam = true;
@@ -151,46 +168,22 @@ public class ProductServiceImpl implements ProductService{
                     default:
                         System.out.println("Invalid input!\n");
                 }
-                if(!containsParam) {
+                if (!containsParam) {
                     System.out.println("Product not found!\n");
                     containsParam = true;
                 }
-            }while (flag);
+            } while (flag);
         }
     }
 
     @Override
     public void saveProductBase() throws IOException {
-        if (products.isEmpty()) {
-            System.out.println("Base empty!");
-        } else {
-            File tempFile = new File("ProductBase.txt");
-            bw = new BufferedWriter(new FileWriter(tempFile));
-            for (Product product:products) {
-                bw.write(baseConvertToFile(product));
-            }
-            bw.close();
-            System.out.printf("BASE is saved successfully to file: %s\n", tempFile.getAbsolutePath());
-        }
-
+        fileApp.saveProductBase(products);
     }
 
     @Override
     public void loadProductBase() throws IOException {
-        File tempFile = new File("ProductBase.txt");
-        br = new BufferedReader(new FileReader(tempFile));
-        String line;
-        while ((line = br.readLine())!=null){
-            int id = Integer.parseInt(line);
-            String name = br.readLine();
-            int number  = Integer.parseInt(br.readLine());
-            int value = Integer.parseInt(br.readLine());
-            int weight = Integer.parseInt(br.readLine());
-            int volume = Integer.parseInt(br.readLine());
-            products.add(new Product(id, name, number, value, weight, volume));
-        }
-        br.close();
-        System.out.println("File is load successfully!\n");
+        fileApp.loadProductBase(products);
     }
 
     @Override
@@ -199,8 +192,7 @@ public class ProductServiceImpl implements ProductService{
         products.clear();
     }
 
-    @Override
-    public int readNumber() throws IOException {
+    private int readNumber() throws IOException {
         int id;
         while (true) {
             try {
@@ -213,8 +205,7 @@ public class ProductServiceImpl implements ProductService{
         return id;
     }
 
-    @Override
-    public String productToString(Product product){
+    private String productToString(Product product){
         return "ID: " + product.getProductId() + "\n"
                 + "Name: " + product.getProductName() + "\n"
                 + "Number: " + product.getProductNumber() + "\n"
@@ -223,13 +214,4 @@ public class ProductServiceImpl implements ProductService{
                 + "Volume: " + product.getProductVolume() + "\r\n";
     }
 
-    @Override
-    public String baseConvertToFile(Product product) {
-        return product.getProductId() + "\r\n"
-                + product.getProductName() + "\r\n"
-                + product.getProductNumber() + "\r\n"
-                + product.getProductValue() + "\r\n"
-                + product.getProductWeight() + "\r\n"
-                + product.getProductVolume() + "\r\n";
-    }
 }
