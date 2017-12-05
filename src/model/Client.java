@@ -42,4 +42,11 @@ public class Client {
         this.clientAge = clientAge;
     }
 
+    public String clientToString(Client client){
+        return "ID: " + client.getClientId() + "\n"
+                + "Name: " + client.getClientName() + "\n"
+                + "Surname: " + client.getClientSurname() + "\n"
+                + "Age: " + client.getClientAge() + "\r\n";
+    }
+
 }

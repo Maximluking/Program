@@ -119,7 +119,7 @@ public class  ClientServiceImpl implements ClientService {
                         int id = readNumber();
                         for (Client client: clients){
                             if (client.getClientId() == id) {
-                                System.out.println("Coincidence:\n" + clientToString(client));
+                                System.out.println("Coincidence:\n" + client.clientToString(client));
                                 containsParam = true;
                             }
                         }
@@ -129,7 +129,7 @@ public class  ClientServiceImpl implements ClientService {
                         String name = reader.readLine();
                         for (Client client: clients) {
                             if (name.equals(client.getClientName())) {
-                                System.out.println("Coincidence:\n" + clientToString(client));
+                                System.out.println("Coincidence:\n" + client.clientToString(client));
                                 containsParam = true;
                             }
                         }
@@ -139,7 +139,7 @@ public class  ClientServiceImpl implements ClientService {
                         String surname = reader.readLine();
                         for (Client client: clients) {
                             if (surname.equals(client.getClientSurname())) {
-                                System.out.println("Coincidence:\n" + clientToString(client));
+                                System.out.println("Coincidence:\n" + client.clientToString(client));
                                 containsParam = true;
                             }
                         }
@@ -149,7 +149,7 @@ public class  ClientServiceImpl implements ClientService {
                         int age = readNumber();
                         for (Client client: clients) {
                             if (age == client.getClientAge()) {
-                                System.out.println("Coincidence:\n" + clientToString(client));
+                                System.out.println("Coincidence:\n" + client.clientToString(client));
                                 containsParam = true;
                             }
                         }
@@ -175,7 +175,7 @@ public class  ClientServiceImpl implements ClientService {
         }else {
             System.out.println("All clients:\n");
             for (Client client : clients) {
-                System.out.println(clientToString(client));
+                System.out.println(client.clientToString(client));
             }
         }
     }
@@ -208,12 +208,4 @@ public class  ClientServiceImpl implements ClientService {
         }
         return id;
     }
-
-    private String clientToString(Client client){
-        return "ID: " + client.getClientId() + "\n"
-                + "Name: " + client.getClientName() + "\n"
-                + "Surname: " + client.getClientSurname() + "\n"
-                + "Age: " + client.getClientAge() + "\r\n";
-    }
-
 }

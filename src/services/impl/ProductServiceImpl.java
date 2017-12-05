@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
         } else {
             System.out.println("All products:\n");
             for (Product product : products) {
-                System.out.println(productToString(product));
+                System.out.println(product.productToString(product));
             }
         }
     }
@@ -147,7 +147,7 @@ public class ProductServiceImpl implements ProductService {
                         int id = readNumber();
                         for (Product product : products) {
                             if (product.getProductId() == id) {
-                                System.out.println("Coincidence:\n" + productToString(product));
+                                System.out.println("Coincidence:\n" + product.productToString(product));
                                 containsParam = true;
                             }
                         }
@@ -157,7 +157,7 @@ public class ProductServiceImpl implements ProductService {
                         String name = reader.readLine();
                         for (Product product : products) {
                             if (name.equals(product.getProductName())) {
-                                System.out.println("Coincidence:\n" + productToString(product));
+                                System.out.println("Coincidence:\n" + product.productToString(product));
                                 containsParam = true;
                             }
                         }
@@ -204,14 +204,4 @@ public class ProductServiceImpl implements ProductService {
         }
         return id;
     }
-
-    private String productToString(Product product){
-        return "ID: " + product.getProductId() + "\n"
-                + "Name: " + product.getProductName() + "\n"
-                + "Number: " + product.getProductNumber() + "\n"
-                + "Value: " + product.getProductValue() + "\n"
-                + "Weight: " + product.getProductWeight() + "\n"
-                + "Volume: " + product.getProductVolume() + "\r\n";
-    }
-
 }

@@ -64,4 +64,13 @@ public class Product {
     public void setProductVolume(int productVolume) {
         this.productVolume = productVolume;
     }
+
+    public String productToString(Product product){
+        return "ID: " + product.getProductId() + "\n"
+                + "Name: " + product.getProductName() + "\n"
+                + "Number: " + product.getProductNumber() + "\n"
+                + "Value: " + product.getProductValue() + "\n"
+                + "Weight: " + product.getProductWeight() + "\n"
+                + "Volume: " + product.getProductVolume() + "\r\n";
+    }
 }
