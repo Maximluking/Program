@@ -2,12 +2,11 @@ package services;
 
 import model.Client;
 import java.io.IOException;
+import java.util.List;
 
 public interface ClientService {
 
     void addClient() throws IOException;
-
-    void showAllClients();
 
     void removeClient() throws IOException;
 
@@ -15,9 +14,6 @@ public interface ClientService {
 
     void findClient() throws IOException;
 
-    void saveClientBase() throws IOException;
+    List<Client> showAllClients();
 
-    void loadClientBase() throws IOException;
-
-    void clearClientBase();
 }

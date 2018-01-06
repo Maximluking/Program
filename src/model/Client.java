@@ -1,20 +1,23 @@
 package model;
 
-public class Client {
+import java.io.Serializable;
 
-    private int clientId;
+public class Client implements Serializable {
+
+    private static final long serialVersionUID = 123L;
+    private transient long clientId;
     private String clientName;
     private String clientSurname;
     private int clientAge;
 
-    public Client(int clientId, String clientName, String clientSurname, int clientAge) {
+    public Client(long clientId, String clientName, String clientSurname, int clientAge) {
         this.clientId = clientId;
         this.clientName = clientName;
         this.clientSurname = clientSurname;
         this.clientAge = clientAge;
     }
 
-    public int getClientId() {
+    public long getClientId() {
         return clientId;
     }
 
@@ -42,11 +45,12 @@ public class Client {
         this.clientAge = clientAge;
     }
 
-    public String clientToString(Client client){
-        return "ID: " + client.getClientId() + "\n"
-                + "Name: " + client.getClientName() + "\n"
-                + "Surname: " + client.getClientSurname() + "\n"
-                + "Age: " + client.getClientAge() + "\r\n";
+    @Override
+    public String toString() {
+        return "ID: " + clientId + ", " +
+                "Name: " + clientName + ", " +
+                "Surname: " + clientSurname + ", " +
+                "Age: " + clientAge + "\r\n";
     }
 
 }

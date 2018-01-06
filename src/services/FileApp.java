@@ -9,10 +9,6 @@ public class FileApp {
     private BufferedWriter bw;
     private BufferedReader br;
 
-    public FileApp() {
-
-    }
-
     public void saveClientBase(List<Client> arrayList) throws IOException {
         if (arrayList.isEmpty()) {
             System.out.println("Base empty!");

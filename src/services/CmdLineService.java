@@ -1,5 +1,8 @@
 package services;
 
+import model.Client;
+import model.Product;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,24 +29,18 @@ public class CmdLineService {
         System.out.println("1. Add client");
         System.out.println("2. Show all clients");
         System.out.println("3. Remove client");
-        System.out.println("4. Change INFO of client");
+        System.out.println("4. Modify client");
         System.out.println("5. Find client");
-        System.out.println("6. Save BASE to file");
-        System.out.println("7. Load BASE from file");
-        System.out.println("8. Clear BASE in RAM");
-        System.out.println("9. Go back");
+        System.out.println("0. Go back");
     }
 
     private static void showProductMenu(){
         System.out.println("1. Add product");
         System.out.println("2. Show all products");
         System.out.println("3. Remove product");
-        System.out.println("4. Change INFO of product");
+        System.out.println("4. Modify product");
         System.out.println("5. Find product");
-        System.out.println("6. Save BASE to file");
-        System.out.println("7. Load BASE from file");
-        System.out.println("8. Clear BASE in RAM");
-        System.out.println("9. Go back");
+        System.out.println("0. Go back");
     }
 
     public void mainMenu() throws IOException {
@@ -78,7 +75,10 @@ public class CmdLineService {
                     clientService.addClient();
                     break;
                 case "2":
-                    clientService.showAllClients();
+                    for (Client client : clientService.showAllClients()) {
+                        System.out.println(client);
+                    }
+                    System.out.println();
                     break;
                 case "3":
                     clientService.removeClient();
@@ -89,16 +89,7 @@ public class CmdLineService {
                 case "5":
                     clientService.findClient();
                     break;
-                case "6":
-                    clientService.saveClientBase();
-                    break;
-                case "7":
-                    clientService.loadClientBase();
-                    break;
-                case "8":
-                    clientService.clearClientBase();
-                    break;
-                case "9":
+                case "0":
                     isWork = false;
                     break;
                 default:
@@ -118,7 +109,10 @@ public class CmdLineService {
                     productService.addProduct();
                     break;
                 case "2":
-                    productService.showAllProducts();
+                    for (Product product : productService.showAllProducts()) {
+                        System.out.println(product);
+                    }
+                    System.out.println();
                     break;
                 case "3":
                     productService.removeProduct();
@@ -129,16 +123,7 @@ public class CmdLineService {
                 case "5":
                     productService.findProduct();
                     break;
-                case "6":
-                    productService.saveProductBase();
-                    break;
-                case "7":
-                    productService.loadProductBase();
-                    break;
-                case "8":
-                    productService.clearProductBase();
-                    break;
-                case "9":
+                case "0":
                     isWork = false;
                     break;
                 default:

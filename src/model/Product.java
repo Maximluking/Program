@@ -1,14 +1,18 @@
 package model;
 
-public class Product {
-    private int productId;
+import java.io.Serializable;
+
+public class Product implements Serializable {
+
+    private static final long serialVersionUID = 123L;
+    private long productId;
     private String productName;
     private int productNumber;
     private int productValue;
     private int productWeight;
     private int productVolume;
 
-    public Product(int productId, String productName, int productNumber, int productValue, int productWeight, int productVolume) {
+    public Product(long productId, String productName, int productNumber, int productValue, int productWeight, int productVolume) {
         this.productId = productId;
         this.productName = productName;
         this.productNumber = productNumber;
@@ -17,7 +21,7 @@ public class Product {
         this.productVolume = productVolume;
     }
 
-    public int getProductId() {
+    public long getProductId() {
         return productId;
     }
 
@@ -35,10 +39,6 @@ public class Product {
 
     public void setProductNumber(int productNumber) {
         this.productNumber = productNumber;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
     }
 
     public int getProductValue() {
@@ -65,12 +65,13 @@ public class Product {
         this.productVolume = productVolume;
     }
 
-    public String productToString(Product product){
-        return "ID: " + product.getProductId() + "\n"
-                + "Name: " + product.getProductName() + "\n"
-                + "Number: " + product.getProductNumber() + "\n"
-                + "Value: " + product.getProductValue() + "\n"
-                + "Weight: " + product.getProductWeight() + "\n"
-                + "Volume: " + product.getProductVolume() + "\r\n";
+    @Override
+    public String toString(){
+        return "ID: " + productId + ", "
+                + "Name: " + productName + ", "
+                + "Number: " + productNumber + ", "
+                + "Value: " + productValue + ", "
+                + "Weight: " + productWeight + ", "
+                + "Volume: " + productVolume + "\r\n";
     }
 }
