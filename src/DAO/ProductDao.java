@@ -1,10 +1,7 @@
 package DAO;
 
 import model.Product;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,7 @@ public class ProductDao {
     public ProductDao() {
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:h2:tcp://localhost/~/TempDBProduct", "", "");
+                    "jdbc:h2:tcp://localhost/~/ProgramDB", "", "");
 
         } catch (Exception e) {
             e.printStackTrace();
