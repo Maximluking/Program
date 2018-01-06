@@ -19,16 +19,17 @@ public class ClientDao {
             System.out.println("Connecting to database...");
             Class.forName (JDBC_DRIVER);
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("connection to the database was successful");
-
+            System.out.println("Connection to the database was successful");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS clients (id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL, surname VARCHAR(20) NOT NULL, age INT(3) NOT NULL);");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void addClient(Client client) {
-        try (PreparedStatement ps = connection.prepareStatement("insert into client (name, surname, age) values(? ,?, ?)");
-        ) {
+        try (PreparedStatement ps = connection.prepareStatement("INSERT INTO clients (name, surname, age) values(? ,?, ?)")){
             ps.setString(1, client.getClientName());
             ps.setString(2, client.getClientSurname());
             ps.setInt(3, client.getClientAge());
@@ -39,10 +40,7 @@ public class ClientDao {
     }
 
     public List<Client> getAll() {
-        try (PreparedStatement ps =
-                     connection.prepareStatement("SELECT * FROM client");
-        ) {
-
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients")){
             ResultSet resultSet = ps.executeQuery();
             List<Client> clients = new ArrayList<>();
             while (resultSet.next()) {
@@ -60,15 +58,12 @@ public class ClientDao {
     }
 
     public void updateClient(Client client) {
-        try (PreparedStatement ps =
-                     connection.prepareStatement("UPDATE client SET name = ?, surname = ?, age = ? WHERE id = ?")) {
-
+        try (PreparedStatement ps = connection.prepareStatement("UPDATE clients SET name = ?, surname = ?, age = ? WHERE id = ?")){
             ps.setString(1, client.getClientName());
             ps.setString(2, client.getClientSurname());
             ps.setInt(3, client.getClientAge());
             ps.setLong(4, client.getClientId());
             ps.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

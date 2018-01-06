@@ -19,8 +19,9 @@ public class ClientServiceDb implements ClientService{
 
     @Override
     public void addClient() throws IOException {
-        System.out.println("Enter ID:");
-        int id = readNumber();
+//        System.out.println("Enter ID:");
+//        int id = readNumber();
+        int id = 0;
         System.out.println("Enter name:");
         String name = reader.readLine();
         System.out.println("Enter surname:");
