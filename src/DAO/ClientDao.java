@@ -12,10 +12,10 @@ public class ClientDao implements Const {
 
     public ClientDao() {
         try {
-            System.out.println("Connecting to database...");
+            System.out.println("Connecting to database from clientDao...");
             Class.forName (JDBC_DRIVER);
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connection to the database was successful");
+            System.out.println("Connection to the database from clientDao was successful");
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS clients" +
                     "(id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL," +

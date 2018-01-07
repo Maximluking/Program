@@ -12,10 +12,10 @@ public class ProductDao implements Const {
 
     public ProductDao() {
         try {
-            System.out.println("Connecting to database...");
+            System.out.println("Connecting to database from productDao...");
             Class.forName (JDBC_DRIVER);
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connection to the database was successful");
+            System.out.println("Connection to the database from productDao was successful");
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS products " +
                     "(id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL, " +
@@ -28,7 +28,7 @@ public class ProductDao implements Const {
     }
 
     public void addProduct(Product product) {
-        try (PreparedStatement ps = connection.prepareStatement("insert into product (name, number, value, weight, volume) values(? ,?, ?, ?, ?)")
+        try (PreparedStatement ps = connection.prepareStatement("insert into products (name, number, value, weight, volume) values(? ,?, ?, ?, ?)")
         ) {
             ps.setString(1, product.getProductName());
             ps.setInt(2, product.getProductNumber());
@@ -42,7 +42,7 @@ public class ProductDao implements Const {
     }
 
     public List<Product> getAll() {
-        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM product")
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM products")
         ) {
 
             ResultSet resultSet = ps.executeQuery();
@@ -64,7 +64,7 @@ public class ProductDao implements Const {
     }
 
     public void updateProduct(Product product) {
-        try (PreparedStatement ps = connection.prepareStatement("UPDATE product SET name = ?, number = ?, value = ?, weight = ?, volume = ? WHERE id = ?")) {
+        try (PreparedStatement ps = connection.prepareStatement("UPDATE products SET name = ?, number = ?, value = ?, weight = ?, volume = ? WHERE id = ?")) {
 
             ps.setString(1, product.getProductName());
             ps.setInt(2, product.getProductNumber());

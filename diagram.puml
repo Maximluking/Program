@@ -1,0 +1,90 @@
+@startuml
+
+title Classes - Program Diagram
+
+
+class Main {
+  +static void main()
+}
+
+class CmdLineService {
+  -BufferedReader reader
+  -ClientService clientService
+  -ProductService productService
+  +void mainMenu()
+  -void clientMenu()
+  -void productMenu()
+  -static void showMainMenu()
+  -static void showProductMenu()
+  -static void showClientMenu()
+}
+
+interface ClientService{
+  +void addClient()
+  +void removeClient()
+  +void editClient()
+  +List<Client> getAllClients()
+}
+class ClientServiceImpl{
+  -ClientDao clientDao
+  -BufferedReader reader
+  +void addClient()
+  +void removeClient()
+  +void editClient()
+  +List<Client> getAllClients()
+}
+
+interface ProductService{
+  +void addProduct()
+  +void removeProduct()
+  +void editProduct()
+  +List<Client> getAllProducts()
+}
+class ProductServiceImpl{
+  -ProductDao productDao
+  -BufferedReader reader
+  +void addProduct()
+  +void removeProduct()
+  +void editProduct()
+  +List<Product> getAllProducts()
+}
+
+class ClientDao{
+    -Connection connection
+    +void addClient(Client client)
+    +List<Client> getAll()
+    +void updateClient(Client client)
+    +void removeClient()
+
+}
+
+class ProductDao{
+    -Connection connection
+    +void addProduct(Product product)
+    +List<Product> getAll()
+    +void updateProduct(Product product)
+    +void removeProduct()
+}
+
+class BufferedReader{
+}
+
+class Client{
+}
+
+class Product{
+}
+
+Main *-- CmdLineService
+CmdLineService *-- BufferedReader
+CmdLineService *-- ClientService
+CmdLineService *-- ProductService
+ClientService <|-- ClientServiceImpl
+ProductService <|-- ProductServiceImpl
+ClientServiceImpl *-- ClientDao
+ClientServiceImpl *-- BufferedReader
+ProductServiceImpl  *-- ProductDao
+ProductServiceImpl  *-- BufferedReader
+
+
+@enduml

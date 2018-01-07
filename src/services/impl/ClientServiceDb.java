@@ -80,7 +80,7 @@ public class ClientServiceDb implements ClientService{
                     String ageS = "" + age;
                     clientDao.findClient("4", ageS);
                     break;
-                case "5":
+                case "0":
                     flag = false;
                     break;
                 default:

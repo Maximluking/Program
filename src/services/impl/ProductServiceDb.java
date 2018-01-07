@@ -20,8 +20,9 @@ public class ProductServiceDb implements ProductService {
 
     @Override
     public void addProduct() throws IOException {
-        System.out.println("Enter ID:");
-        int id = readNumber();
+//        System.out.println("Enter ID:");
+//        int id = readNumber();
+        int id = 0;
         System.out.println("Enter name:");
         String name = reader.readLine();
         System.out.println("Enter number:");
@@ -44,9 +45,8 @@ public class ProductServiceDb implements ProductService {
 
     @Override
     public void modifyProduct() throws IOException {
-//        System.out.println("Enter ID:");
-//        int id = readNumber();
-        int id = 0;
+        System.out.println("Enter ID:");
+        int id = readNumber();
         System.out.println("Enter name:");
         String name = reader.readLine();
         System.out.println("Enter number:");
