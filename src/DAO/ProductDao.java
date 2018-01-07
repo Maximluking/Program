@@ -1,27 +1,34 @@
 package DAO;
 
 import model.Product;
+import services.Const;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao {
+public class ProductDao implements Const {
 
     private Connection connection;
 
     public ProductDao() {
         try {
-            connection = DriverManager.getConnection(
-                    "jdbc:h2:tcp://localhost/~/ProgramDB", "", "");
-
+            System.out.println("Connecting to database...");
+            Class.forName (JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("Connection to the database was successful");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS products " +
+                    "(id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL, " +
+                    "number INT(10) NOT NULL, value INT(10) NOT NULL, " +
+                    "weight INT(10) NOT NULL," +
+                    "volume INT(10) NOT NULL);");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void addProduct(Product product) {
-        try (PreparedStatement ps =
-                     connection.prepareStatement("insert into product (name, number, value, weight, volume) values(? ,?, ?, ?, ?)");
+        try (PreparedStatement ps = connection.prepareStatement("insert into product (name, number, value, weight, volume) values(? ,?, ?, ?, ?)")
         ) {
             ps.setString(1, product.getProductName());
             ps.setInt(2, product.getProductNumber());
@@ -35,8 +42,7 @@ public class ProductDao {
     }
 
     public List<Product> getAll() {
-        try (PreparedStatement ps =
-                     connection.prepareStatement("SELECT * FROM product");
+        try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM product")
         ) {
 
             ResultSet resultSet = ps.executeQuery();
@@ -58,8 +64,7 @@ public class ProductDao {
     }
 
     public void updateProduct(Product product) {
-        try (PreparedStatement ps =
-                     connection.prepareStatement("UPDATE product SET name = ?, number = ?, value = ?, weight = ?, volume = ? WHERE id = ?")) {
+        try (PreparedStatement ps = connection.prepareStatement("UPDATE product SET name = ?, number = ?, value = ?, weight = ?, volume = ? WHERE id = ?")) {
 
             ps.setString(1, product.getProductName());
             ps.setInt(2, product.getProductNumber());
@@ -71,6 +76,59 @@ public class ProductDao {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void removeProduct(int id){
+        try (PreparedStatement ps = connection.prepareStatement("DELETE FROM products WHERE id = ?")){
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void findProduct(String findParam, String param){
+        switch (findParam) {
+            case "1":
+                try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM products WHERE ID = " + Integer.valueOf(param))) {
+                    ResultSet resultSet = ps.executeQuery();
+                    List<Product> products = new ArrayList<>();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name = resultSet.getString("name");
+                        int number = resultSet.getInt("number");
+                        int value = resultSet.getInt("value");
+                        int weight = resultSet.getInt("weight");
+                        int volume = resultSet.getInt("volume");
+                        products.add(new Product(id, name, number, value, weight, volume));
+                    }
+                    for(Product product: products){
+                        System.out.println(product.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "2":
+                try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM products WHERE NAME LIKE '" + param + "%'")) {
+                    ResultSet resultSet = ps.executeQuery();
+                    List<Product> products = new ArrayList<>();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name = resultSet.getString("name");
+                        int number = resultSet.getInt("number");
+                        int value = resultSet.getInt("value");
+                        int weight = resultSet.getInt("weight");
+                        int volume = resultSet.getInt("volume");
+                        products.add(new Product(id, name, number, value, weight, volume));
+                    }
+                    for(Product product: products){
+                        System.out.println(product.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 }

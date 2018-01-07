@@ -55,7 +55,7 @@ public class ClientServiceDb implements ClientService{
     public void findClient() throws IOException {
         Boolean flag = true;
         do {
-            System.out.println("Select the parameter to search:\n 1) ID.\n 2) Name.\n 3) Surname.\n 4) Age.\n 5) Exit.\n");
+            System.out.println("Select the parameter to search:\n 1) ID.\n 2) Name.\n 3) Surname.\n 4) Age.\n 0) Exit.\n");
             String s = reader.readLine();
             switch (s) {
                 case "1":

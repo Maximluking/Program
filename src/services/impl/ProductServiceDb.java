@@ -37,13 +37,16 @@ public class ProductServiceDb implements ProductService {
 
     @Override
     public void removeProduct() throws IOException {
-
+        System.out.println("Enter ID of product to remove:");
+        int id = readNumber();
+        productDao.removeProduct(id);
     }
 
     @Override
     public void modifyProduct() throws IOException {
-        System.out.println("Enter ID:");
-        int id = readNumber();
+//        System.out.println("Enter ID:");
+//        int id = readNumber();
+        int id = 0;
         System.out.println("Enter name:");
         String name = reader.readLine();
         System.out.println("Enter number:");
@@ -59,7 +62,29 @@ public class ProductServiceDb implements ProductService {
 
     @Override
     public void findProduct() throws IOException {
-
+        Boolean flag = true;
+        do {
+            System.out.println("Select the parameter to search:\n 1) ID.\n 2) Name.\n 0) Exit.\n");
+            String s = reader.readLine();
+            switch (s) {
+                case "1":
+                    System.out.println("Enter ID:");
+                    int id = readNumber();
+                    String idS = "" + id;
+                    productDao.findProduct("1", idS);
+                    break;
+                case "2":
+                    System.out.println("Enter name:");
+                    String name = reader.readLine();
+                    productDao.findProduct("2", name);
+                    break;
+                case "0":
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Invalid input!\n");
+            }
+        }while (flag) ;
     }
 
     @Override
@@ -78,12 +103,5 @@ public class ProductServiceDb implements ProductService {
             }
         }
         return id;
-    }
-    public void removeProduct(Product product){
-
-    }
-
-    public void findProduct(Product product){
-
     }
 }

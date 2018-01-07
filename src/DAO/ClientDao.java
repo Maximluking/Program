@@ -1,16 +1,12 @@
 package DAO;
 
 import model.Client;
+import services.Const;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDao {
-
-    static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:tcp://localhost/~/ProgramDB";
-    static final String USER = "";
-    static final String PASS = "";
+public class ClientDao implements Const {
 
     private Connection connection;
 
@@ -21,11 +17,12 @@ public class ClientDao {
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("Connection to the database was successful");
             Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS clients (id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL, surname VARCHAR(20) NOT NULL, age INT(3) NOT NULL);");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS clients" +
+                    "(id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL," +
+                    "surname VARCHAR(20) NOT NULL, age INT(3) NOT NULL);");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void addClient(Client client) {
