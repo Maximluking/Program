@@ -47,10 +47,10 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: " + clientId + ", " +
-                "Name: " + clientName + ", " +
-                "Surname: " + clientSurname + ", " +
-                "Age: " + clientAge + "\r\n";
+        return "id: " + clientId + ", " +
+                "name: " + clientName + ", " +
+                "surname: " + clientSurname + ", " +
+                "age: " + clientAge;
     }
 
 }

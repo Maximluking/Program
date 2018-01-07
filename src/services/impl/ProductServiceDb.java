@@ -46,8 +46,6 @@ public class ProductServiceDb implements ProductService {
         int id = readNumber();
         System.out.println("Enter name:");
         String name = reader.readLine();
-        System.out.println("Enter surname:");
-        String surname = reader.readLine();
         System.out.println("Enter number:");
         int number = readNumber();
         System.out.println("Enter value:");

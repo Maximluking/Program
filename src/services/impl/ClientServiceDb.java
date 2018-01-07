@@ -33,12 +33,14 @@ public class ClientServiceDb implements ClientService{
 
     @Override
     public void removeClient() throws IOException {
-
+        System.out.println("Enter ID of client to remove:");
+        int id = readNumber();
+        clientDao.removeClient(id);
     }
 
     @Override
     public void modifyClient() throws IOException {
-        System.out.println("Enter ID:");
+        System.out.println("Enter ID to change:");
         int id = readNumber();
         System.out.println("Enter name:");
         String name = reader.readLine();
@@ -51,7 +53,40 @@ public class ClientServiceDb implements ClientService{
 
     @Override
     public void findClient() throws IOException {
-
+        Boolean flag = true;
+        do {
+            System.out.println("Select the parameter to search:\n 1) ID.\n 2) Name.\n 3) Surname.\n 4) Age.\n 5) Exit.\n");
+            String s = reader.readLine();
+            switch (s) {
+                case "1":
+                    System.out.println("Enter ID:");
+                    int id = readNumber();
+                    String idS = "" + id;
+                    clientDao.findClient("1", idS);
+                    break;
+                case "2":
+                    System.out.println("Enter name:");
+                    String name = reader.readLine();
+                    clientDao.findClient("2", name);
+                    break;
+                case "3":
+                    System.out.println("Enter surname:");
+                    String surname = reader.readLine();
+                    clientDao.findClient("3", surname);
+                    break;
+                case "4":
+                    System.out.println("Enter age:");
+                    int age = readNumber();
+                    String ageS = "" + age;
+                    clientDao.findClient("4", ageS);
+                    break;
+                case "5":
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Invalid input!\n");
+            }
+        }while (flag) ;
     }
 
     @Override

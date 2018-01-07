@@ -67,14 +67,91 @@ public class ClientDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    public void removeClient(Client client){
-
+    public void removeClient(int id){
+        try (PreparedStatement ps = connection.prepareStatement("DELETE FROM clients WHERE id = ?")){
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void findClient(Client client){
-
+    public void findClient(String findParam, String param){
+        switch (findParam) {
+            case "1":
+                try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE ID = " + Integer.valueOf(param))) {
+                    ResultSet resultSet = ps.executeQuery();
+                    List<Client> clients = new ArrayList<>();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name = resultSet.getString("name");
+                        String surname = resultSet.getString("surname");
+                        int age = resultSet.getInt("age");
+                        clients.add(new Client(id, name, surname, age));
+                    }
+                    for(Client client: clients){
+                        System.out.println(client.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "2":
+                try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE NAME LIKE '" + param + "%'")) {
+                    ResultSet resultSet = ps.executeQuery();
+                    List<Client> clients = new ArrayList<>();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name = resultSet.getString("name");
+                        String surname = resultSet.getString("surname");
+                        int age = resultSet.getInt("age");
+                        clients.add(new Client(id, name, surname, age));
+                    }
+                    for(Client client: clients){
+                        System.out.println(client.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "3":
+                try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE SURNAME LIKE '" + param + "%'")) {
+                    ResultSet resultSet = ps.executeQuery();
+                    List<Client> clients = new ArrayList<>();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name = resultSet.getString("name");
+                        String surname = resultSet.getString("surname");
+                        int age = resultSet.getInt("age");
+                        clients.add(new Client(id, name, surname, age));
+                    }
+                    for(Client client: clients){
+                        System.out.println(client.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "4":
+                try (PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE age = " + Integer.valueOf(param))) {
+                    ResultSet resultSet = ps.executeQuery();
+                    List<Client> clients = new ArrayList<>();
+                    while (resultSet.next()) {
+                        int id = resultSet.getInt("id");
+                        String name = resultSet.getString("name");
+                        String surname = resultSet.getString("surname");
+                        int age = resultSet.getInt("age");
+                        clients.add(new Client(id, name, surname, age));
+                    }
+                    for(Client client: clients){
+                        System.out.println(client.toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
     }
 }
