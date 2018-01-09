@@ -1,21 +1,19 @@
 package DAO;
 
 import model.Product;
-import services.Const;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDao implements Const {
+public class ProductDao {
 
     private Connection connection;
 
     public ProductDao() {
         try {
-            System.out.println("Connecting to database from productDao...");
-            Class.forName (JDBC_DRIVER);
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("Connection to the database from productDao was successful");
+            Class.forName ("org.h2.Driver");
+            connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "", "");
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS products " +
                     "(id INT(10) NOT NULL IDENTITY(1,1) PRIMARY KEY, name VARCHAR(20) NOT NULL, " +
