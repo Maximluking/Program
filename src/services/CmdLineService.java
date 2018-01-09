@@ -22,7 +22,7 @@ public class CmdLineService {
     private static void showMainMenu(){
         System.out.println("1. Clients");
         System.out.println("2. Products");
-        System.out.println("3. Exit");
+        System.out.println("0. Exit");
     }
 
     private static void showClientMenu(){
@@ -55,7 +55,7 @@ public class CmdLineService {
                 case "2":
                     productMenu();
                     break;
-                case "3":
+                case "0":
                     isWork = false;
                     break;
                 default:
